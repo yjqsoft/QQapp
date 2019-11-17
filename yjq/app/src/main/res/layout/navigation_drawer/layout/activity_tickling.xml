@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@android:color/darker_gray"
+    android:orientation="vertical"
+    tools:context="com.example.yexin.menu6.Sideslip.Sideslip_center.Share.Tickling">
+    <Button
+        android:id="@+id/tijiao"
+        android:layout_width="235dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bt_shape"
+
+        android:text="提交"
+        android:textColor="#EDFDFDFB"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText1"
+        tools:layout_editor_absoluteX="74dp" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="368dp"
+        android:layout_height="236dp"
+
+        android:layout_marginBottom="80dp"
+        android:background="@android:drawable/edit_text"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="请填写不少于五个字的详细问题描述以便我们提供更好的帮助"
+        android:inputType="textMultiLine"
+        android:maxLength="300"
+        android:maxLines="20"
+        android:scrollbars="vertical"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tijiao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center_vertical"
+        android:hapticFeedbackEnabled="false"
+        android:text="问题与意见"
+
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/editText1"
+        app:layout_constraintEnd_toStartOf="@+id/tongji"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="-2dp" />
+
+    <TextView
+        android:id="@+id/tongji"
+        android:layout_width="194dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="50dp"
+        android:gravity="right|center_vertical"
+        android:verticalScrollbarPosition="right"
+        app:layout_constraintBottom_toTopOf="@+id/editText1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="194dp" />
+
+</android.support.constraint.ConstraintLayout>

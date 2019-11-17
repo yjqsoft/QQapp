@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/icon_shouye"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_games"
+        android:icon="@drawable/icon_games"
+        android:title="@string/title_games" />
+
+    <item
+        android:id="@+id/navigation_friends"
+        android:icon="@drawable/icon_friends"
+        android:title="@string/title_friends" />
+
+</menu>

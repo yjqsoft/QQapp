@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            style="@style/time_select"
+            android:text="10月26日(今天)"
+            android:drawableRight="@drawable/date" />
+
+        <TextView
+            style="@style/time_select"
+            android:text="09:00~22:00"
+            android:drawableRight="@drawable/clock"/>
+        <TextView
+            style="@style/time_select"
+            android:text="室内室外"
+            android:drawableRight="@drawable/building"/>
+
+        <Button
+
+            android:layout_marginTop="10dp"
+            android:id="@+id/button"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="18dp"
+            android:textColor="@color/colorWhite"
+            android:textAlignment="center"
+            android:background="@drawable/button_bg"
+            android:text="查找场馆" />
+    </LinearLayout>
+
+
+</LinearLayout>

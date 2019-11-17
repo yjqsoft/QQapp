@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <group android:checkableBehavior="single"
+
+        >
+        <item
+
+            android:id="@+id/nav_indent"
+            android:icon="@drawable/icon_indent"
+
+            android:title="我的订单" />
+        <item
+            android:id="@+id/nav_wallet"
+            android:icon="@drawable/icon_wallet"
+            android:title="我的钱包" />
+        <item
+            android:id="@+id/nav_erweima"
+            android:icon="@drawable/icon_erweima"
+            android:title="我的二维码" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/icon_share"
+            android:title="有奖分享" />
+        <item
+            android:id="@+id/nav_yijianfankui"
+            android:icon="@drawable/icon_yijianfankui"
+            android:title="意见反馈" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/icon_help"
+            android:title="帮助" />
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/icon_setting"
+            android:title="设置"
+            />
+    </group>
+
+</menu>
+
+
+
