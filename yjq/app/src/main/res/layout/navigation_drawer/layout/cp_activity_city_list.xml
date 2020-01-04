@@ -9,7 +9,7 @@
     <include layout="@layout/common_tittle_bar"/>
 
 
-    <include layout="@layout/view_search"/>
+    <include layout="@layout/view_search" />
 
     <RelativeLayout
         android:layout_width="match_parent"

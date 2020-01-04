@@ -35,9 +35,13 @@ public class User_public {
 
      * 初始化问题
      * @param sharedPreferences
+
      */
     public User_public(Context sharedPreferences){
         this.preferences=sharedPreferences.getSharedPreferences("user",MODE_PRIVATE);
+    }
+
+    public User_public(){
     }
     public  void init(){
         SharedPreferences.Editor editor=this.preferences.edit();

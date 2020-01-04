@@ -9,6 +9,7 @@ import com.example.yexin.menu6.R;
 
 /**
  * Created by ye xin on 2019/10/31.
+ * 二级导航栏运动选项适配器
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.AuthorViewHolder>{

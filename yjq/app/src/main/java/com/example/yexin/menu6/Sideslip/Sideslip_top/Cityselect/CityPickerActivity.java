@@ -73,15 +73,9 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
         setContentView(R.layout.cp_activity_city_list);
 
         initView();
-
-
-        Log.w("base","initView_执行");
         initData();
-        Log.w("base","initData_执行");
         getLocation();
-        Log.w("base","initgetLo_执行");
     }
-
     protected void initView() {
         mListView = findViewById(R.id.listview_all_city);
         mResultListView=findViewById(R.id.search_result_listview);
@@ -100,6 +94,7 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
         mListView.setAdapter(mCityAdapter);
 
 
+
         //搜索框功能实现
         searchBox = (EditText) findViewById(R.id.et_search);
         search_clear=(ImageView)findViewById(R.id.iv_search_clear);
@@ -110,13 +105,9 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
          searchBox.addTextChangedListener(new TextWatcher() {
              @Override
              public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
              }
-
              @Override
              public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
              }
 
              @Override
@@ -125,7 +116,6 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
                  HashSet<City> citys_search = new HashSet<>();
                  if (TextUtils.isEmpty(s)){
                      mResultListView.setVisibility(View.GONE);
-                     Log.w("shuju",s.toString());
                      search_clear.setVisibility(View.GONE);
                  }else  {
 
@@ -146,13 +136,10 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
                                  citys_search.add(new City(childrenBeanX.name, PinyinUtils.getPinYin(childrenBeanX.name)));
                                  Log.w("pingying市2",new City(childrenBeanX.name, PinyinUtils.getPinYin(childrenBeanX.name)).toString());
                                  mResultListView.setVisibility(View.VISIBLE);
-
                              }
-
                          }
                      }
 
-                     Log.w("shuju",s.toString());
                      search_clear.setVisibility(View.VISIBLE);
                  }
                  if(s!=null){
@@ -160,6 +147,15 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
                      mResultCityAdapter=new ResultListAdapter(CityPickerActivity.this,cities_search);
                      mResultListView.setAdapter(mResultCityAdapter);
 
+                     mResultCityAdapter.setOnResultClickListener(new ResultListAdapter.OnResultClickListener(){
+                         @Override
+                         public void onCityClick(String name) {
+                             Intent intent_ityselect1 = getIntent();
+                             intent_ityselect1.putExtra("city_name", name);
+                             setResult(1, intent_ityselect1);
+                             finish();
+                         }
+                     });
                  }
 
              }
@@ -188,8 +184,6 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
     }
 
     public void getCityData() {
-        Log.w("base","getCitydata_执行中1");
-
         String json = ReadAssetsFileUtil.getJson(this, "city.json");
         CityPickerBean bean = GsonUtil.getBean(json, CityPickerBean.class);
         HashSet<City> citys = new HashSet<>();
@@ -202,8 +196,6 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
                 citys.add(new City(childrenBeanX.id, childrenBeanX.name, PinyinUtils.getPinYin(childrenBeanX.name), childrenBeanX.is_hot == 1));
             }
         }
-
-        Log.w("base","getCitydata_执行中2");
         //set转换list
         ArrayList<City> cities = new ArrayList<>(citys);
         //按照字母排序
@@ -224,9 +216,9 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
 
                 Toast.makeText(CityPickerActivity.this, name, Toast.LENGTH_SHORT).show();
 
-                Intent intent_ityselect=getIntent();
-                intent_ityselect.putExtra("city_name",name);
-                setResult(1,intent_ityselect);
+                Intent intent_ityselect = getIntent();
+                intent_ityselect.putExtra("city_name", name);
+                setResult(1, intent_ityselect);
                 finish();
             }
 

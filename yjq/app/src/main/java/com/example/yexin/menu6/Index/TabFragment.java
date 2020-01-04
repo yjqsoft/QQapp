@@ -13,6 +13,7 @@ import com.example.yexin.menu6.R;
 
 /**
  * A simple {@link } subclass.
+ * 二级导航栏运动选项行排，篮球，足球，网球，羽毛球
  */
 public class TabFragment extends android.support.v4.app.Fragment {
 

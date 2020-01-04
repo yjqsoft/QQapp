@@ -39,8 +39,6 @@ public class CityListAdapter extends BaseAdapter {
     private String locatedCity;
     private List<City> mHotData = new ArrayList<>();
 
-
-
     public void setData(List<City> mCities) {
         this.mCities = mCities;
 
@@ -102,6 +100,7 @@ public class CityListAdapter extends BaseAdapter {
 
     @Override
     public  int getViewTypeCount() {
+
         return VIEW_TYPE_COUNT;
     }
 
@@ -109,8 +108,6 @@ public class CityListAdapter extends BaseAdapter {
     public int getItemViewType(int position) {
         return position < VIEW_TYPE_COUNT - 1 ? position : VIEW_TYPE_COUNT - 1;
     }
-
-
 
     @Override
     public int getCount() {

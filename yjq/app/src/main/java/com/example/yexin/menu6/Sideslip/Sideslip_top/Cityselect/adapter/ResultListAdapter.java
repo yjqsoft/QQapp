@@ -1,13 +1,11 @@
 package com.example.yexin.menu6.Sideslip.Sideslip_top.Cityselect.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.example.yexin.menu6.R;
 import com.example.yexin.menu6.Sideslip.Sideslip_top.Cityselect.bean.City;
 
@@ -21,13 +19,13 @@ import java.util.List;
 public class ResultListAdapter extends BaseAdapter {
     private Context mContext;
     private List<City> mCities;
-    private LayoutInflater inflater;
-    private CityListAdapter.OnCityClickListener onCityClickListener;
+    //private LayoutInflater inflater;
+    private OnResultClickListener onResultClickListener;
 
     public ResultListAdapter(Context mContext, List<City> mCities) {
         this.mCities = mCities;
         this.mContext = mContext;
-        this.inflater = LayoutInflater.from(mContext);
+        //this.inflater = LayoutInflater.from(mContext);
     }
 
     public void changeData(List<City> list) {
@@ -39,7 +37,6 @@ public class ResultListAdapter extends BaseAdapter {
         }
         notifyDataSetChanged();
     }
-
     @Override
     public int getCount() {
         return mCities == null ? 0 : mCities.size();
@@ -56,34 +53,34 @@ public class ResultListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
-        Log.w("base适配器中1",mCities.get(0).getName());
+    public View getView(final int position, View view, ViewGroup parent) {
         ResultViewHolder holder;
         if (view == null) {
            // view = LayoutInflater.from(mContext).inflate(R.layout.cp_activity_city_list, parent, false);
             view = LayoutInflater.from(mContext).inflate(R.layout.cp_item_search_result_listview, parent, false);
             holder = new ResultViewHolder();
             holder.name = (TextView) view.findViewById(R.id.tv_item_result_listview_name);
+            holder.name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //实现接口 返回城市名字
+                    onResultClickListener.onCityClick(mCities.get(position).getName());
+                }
+            });
             view.setTag(holder);
         } else {
             holder = (ResultViewHolder) view.getTag();
         }
         holder.name.setText(mCities.get(position).getName());
 
-       /* view = inflater.inflate(R.layout.cp_item_search_result_listview, parent, false);
-        TextView gridView=(TextView)view.findViewById(R.id.tv_item_result_listview_name);
-        final ResultListAdapter mResultListAdapter = new ResultListAdapter(mContext,mCities);
-        gridView.setAdapter(mResultListAdapter);
-        mResultListAdapter.setData(mCities);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (onCityClickListener != null) {
-                    onCityClickListener.onCityClick(hotCityGridAdapter.getItem(position).toString());
-                }
-            }
-        });*/
         return view;
+    }
+//定义接口 使CityPickerActivity实现  返回城市名字
+    public void setOnResultClickListener(OnResultClickListener listener) {
+        this.onResultClickListener=listener;
+    }
+    public interface OnResultClickListener {
+        void onCityClick(String name);
     }
 
     public static class ResultViewHolder {

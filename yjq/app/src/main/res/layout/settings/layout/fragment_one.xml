@@ -4,41 +4,60 @@
     android:layout_height="match_parent"
     tools:context="com.example.yexin.menu6.Index.oneFragment"
     android:orientation="vertical">
-
-    <!-- TODO: Update blank fragment layout -->
-
-    <com.youth.banner.Banner
-        android:layout_marginTop="60dp"
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@color/colorWhite"
-        />
+<ScrollView
+    android:scrollbars="none"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tablayout"
+        <com.youth.banner.Banner
+            android:layout_marginTop="60dp"
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/colorWhite"
+            />
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF">
-        </android.support.design.widget.TabLayout>
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/tab_viewpager"
+            android:orientation="vertical">
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF">
+            </android.support.design.widget.TabLayout>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/tab_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="195dp"
+                android:background="@android:color/white" />
+        </LinearLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="195dp"
-            android:background="@android:color/white" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_tuijian"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp"
+                android:text="推荐场馆"
+                android:background="@color/white"/>
+            <ListView
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/tv_tuijian"
+                android:id="@+id/fragmentone_select_listview"
+                android:layout_width="match_parent"
+                android:layout_height="420dp"
+                android:layout_marginBottom="20dp"/>
+        </RelativeLayout>
+
     </LinearLayout>
-    <ImageView
-        android:id="@+id/one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="60dp"
-        android:onClick="onClick"
-        />
+</ScrollView>
 </LinearLayout>

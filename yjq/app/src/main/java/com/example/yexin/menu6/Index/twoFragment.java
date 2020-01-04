@@ -12,6 +12,7 @@ import com.example.yexin.menu6.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ * 第二主界面
  */
 public class twoFragment extends android.support.v4.app.Fragment {
 

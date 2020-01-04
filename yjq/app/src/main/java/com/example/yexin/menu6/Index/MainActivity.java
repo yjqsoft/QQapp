@@ -47,6 +47,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.yexin.menu6.Ballculb.Payfaceture;
 import com.example.yexin.menu6.Common.Json.WebMoreInfomation;
 import com.example.yexin.menu6.Common.Public_class.UserPublic;
 import com.example.yexin.menu6.Common.Public_class.User_public;
@@ -273,6 +274,9 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
         } else if (id == R.id.nav_erweima) {
             Toast.makeText(this,"3",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity.this,Payfaceture.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_share) {
            /*
            * 分享功能

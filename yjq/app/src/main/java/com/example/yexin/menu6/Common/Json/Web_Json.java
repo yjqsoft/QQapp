@@ -28,7 +28,6 @@ public class Web_Json {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("sa", jsonObject.toString());
         return jsonObject.toString();
     }
     /**
@@ -41,7 +40,9 @@ public class Web_Json {
             map.put("code",jsonObject.get("code").toString());
             map.put("message",jsonObject.get("message").toString());
             map.put("token",jsonObject.get("token").toString());
-            map.put("Icon",jsonObject.get("IconTime").toString());
+            map.put("Picture",jsonObject.get("Picture").toString());
+            map.put("NickName",jsonObject.get("NickName").toString());
+            map.put("Level",jsonObject.get("Level").toString());
             Log.e("json",jsonObject.get("code")+" " +jsonObject.get("message")+" "+ jsonObject.get("token"));
         }catch (Exception e){
             e.printStackTrace();
@@ -59,7 +60,6 @@ public class Web_Json {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("sa", jsonObject.toString());
         return jsonObject.toString();
     }
 }

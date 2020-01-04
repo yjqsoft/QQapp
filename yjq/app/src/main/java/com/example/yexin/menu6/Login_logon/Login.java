@@ -1,9 +1,13 @@
 package com.example.yexin.menu6.Login_logon;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +20,6 @@ import com.example.yexin.menu6.Common.Json.Web_Json;
 import com.example.yexin.menu6.Common.Public_class.UserPublic;
 import com.example.yexin.menu6.Common.Public_class.User_public;
 import com.example.yexin.menu6.Common.Url.Web_url;
-import com.example.yexin.menu6.Common.Xutil3.XutilThread;
 import com.example.yexin.menu6.Index.MainActivity;
 import com.example.yexin.menu6.R;
 
@@ -24,9 +27,14 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
-import java.io.File;
 import java.util.HashMap;
 
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
+import permissions.dispatcher.RuntimePermissions;
+
+@RuntimePermissions
 public class Login extends Activity {
     private TextView tv_register;
     private EditText text_username;
@@ -35,11 +43,39 @@ public class Login extends Activity {
     private String UserName=null;
     private String UserPassword=null;
     private User_public user_public=null;
+
+    @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.RECEIVE_SMS,Manifest.permission.READ_SMS,Manifest.permission.CAMERA})
+    public void getSingle() {
+        Toast.makeText(this, "权限申请成功", Toast.LENGTH_SHORT).show();
+    }
+    @OnShowRationale({Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.RECEIVE_SMS,Manifest.permission.READ_SMS,Manifest.permission.CAMERA})
+    public void showSingleRationale(final PermissionRequest request) {
+        new AlertDialog.Builder(this)
+                .setMessage("为了正常使用，将获取您的一些权限信息")
+                .setPositiveButton("下一步", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        request.proceed();//继续执行请求
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                request.cancel();//取消执行请求
+            }
+        }).show();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        LoginPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         user_public=new User_public(this);
         setContentView(R.layout.activity_login);
+        LoginPermissionsDispatcher.getSingleWithPermissionCheck(this);
         Layout_init();
     }
     public void Layout_init(){
@@ -74,6 +110,12 @@ public class Login extends Activity {
                             UserPublic.setUser(UserName);
                             user_public.setUser_str(map.get("token"));
                             UserPublic.setUser_str(map.get("token"));
+                            user_public.setIcon(map.get("Picture"));
+                            UserPublic.setIcon(map.get("Picture"));
+                            user_public.setUser_n(map.get("NickName"));
+                            UserPublic.setUser_n(map.get("NickName"));
+                            user_public.setUser_level(map.get("Level"));
+                            UserPublic.setUser_level(map.get("Level"));
                             Log.e("yjq1", "编码:"+map.get("code")+map.get("message"+map.get("token")));
                         }
                         @Override
@@ -90,8 +132,6 @@ public class Login extends Activity {
                             Log.e("yjq","完成");
                             user_public.setFirst(false);  //是从登入去的，不需要更新长连接
                             UserPublic.setFirst(false);
-                            MoreInformation moreInformation=new MoreInformation(UserPublic.getUser(),Login.this);
-                            moreInformation.getInfomation();
                             Intent intent = new Intent(Login.this,MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -166,10 +206,10 @@ public class Login extends Activity {
 //                            Log.e("yjq","完成");
 //                        }
 //                    });
+                } else {
 //                    Intent intent = new Intent(Login.this,MainActivity.class);
 //                    startActivity(intent);
 //                    finish();
-                } else {
                     Log.e("WangJ", "都空");
                     Toast.makeText(Login.this, "账号、密码都不能为空！", Toast.LENGTH_SHORT).show();
                 }

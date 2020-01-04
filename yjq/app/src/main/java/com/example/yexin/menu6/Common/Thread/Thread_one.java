@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.example.yexin.menu6.Common.Json.WebMoreInfomation;
 import com.example.yexin.menu6.Common.Json.Web_Json;
 import com.example.yexin.menu6.Common.Public_class.UserPublic;
-import com.example.yexin.menu6.Common.Xutil3.XutilThread;
 import com.example.yexin.menu6.Index.MainActivity;
 import com.example.yexin.menu6.Login_logon.Login;
 import com.example.yexin.menu6.Common.Public_class.User_public;

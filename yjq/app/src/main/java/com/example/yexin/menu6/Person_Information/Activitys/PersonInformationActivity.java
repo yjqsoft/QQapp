@@ -21,6 +21,7 @@ import com.example.yexin.menu6.Common.Public_class.UserPublic;
 import com.example.yexin.menu6.Common.Public_class.User_public;
 import com.example.yexin.menu6.Common.Url.Web_url;
 import com.example.yexin.menu6.Index.MainActivity;
+import com.example.yexin.menu6.Login_logon.Login;
 import com.example.yexin.menu6.Person_Information.Model.AddressDetailsEntity;
 import com.example.yexin.menu6.Person_Information.Model.AddressModel;
 import com.example.yexin.menu6.Person_Information.Utils.JsonUtil;
@@ -180,6 +181,8 @@ public class PersonInformationActivity extends Activity implements OnAddressChan
                 startActivityForResult(intent_five,4);
                 break;
             case R.id.iv_head:
+                Intent intent = new Intent(PersonInformationActivity.this,Header.class);
+                startActivity(intent);
 //                checkPermission(PersonInformationActivity.this);
 //                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //                intent.setAction(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
