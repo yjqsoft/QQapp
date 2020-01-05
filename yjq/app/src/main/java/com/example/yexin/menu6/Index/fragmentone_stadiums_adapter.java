@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yexin.menu6.R;
-import com.example.yexin.menu6.Sideslip.Sideslip_top.Cityselect.adapter.CityListAdapter;
 
 import java.util.LinkedList;
 
@@ -47,15 +46,13 @@ public class fragmentone_stadiums_adapter extends BaseAdapter {
 
         return position;
     }
-
+    //在适配器中进行数据适配**12138
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder=null;
-
         if(convertView==null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.fragmentone_stadiums, parent, false);
             holder = new ViewHolder();
-
             holder.tv_ballclub_name = (TextView) convertView.findViewById(R.id.tv_ballclub_name);
             holder.tv_appraise = (TextView) convertView.findViewById(R.id.tv_appraise);
             holder.tv_address = (TextView) convertView.findViewById(R.id.tv_address);
@@ -63,16 +60,14 @@ public class fragmentone_stadiums_adapter extends BaseAdapter {
             holder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);
             holder.btn_order=(Button)convertView.findViewById(R.id.btn_order);
              name=holder.tv_ballclub_name.getText().toString();
+            //添加监听器   将数据传入 场馆界面中去 **12138
             holder.btn_order.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-
-                 //   convertView.
-
-
                     /*获取当前适配条 字段  待解决*/
                     Log.e("wz","hhj1"+mData.get(position).getNo());/*场馆编号获取到*/
                     Toast.makeText(mContext,"aaav"+mData.get(position).getNo(),Toast.LENGTH_SHORT).show();
+
 
 
                     Intent intent=new Intent(mContext,main_stadiums.class);
@@ -92,10 +87,8 @@ public class fragmentone_stadiums_adapter extends BaseAdapter {
         holder.tv_address.setText(mData.get(position).getAddress());
         holder.tv_distance.setText(mData.get(position).getDistance());
         holder.tv_price.setText(mData.get(position).getPrice());
-
         return convertView;
     }
-
 
     static class ViewHolder{
         TextView tv_ballclub_name;

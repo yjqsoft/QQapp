@@ -59,7 +59,6 @@ dependencies {
     compile('com.github.hotchemi:permissionsdispatcher:3.1.0') {
         // if you don't use android.app.Fragment you can exclude support for them
     }
-    compile files('libs/BaiduLBS_Android.jar')
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
@@ -74,4 +73,5 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
+    compile files('libs/BaiduLBS_Android.jar')
 }

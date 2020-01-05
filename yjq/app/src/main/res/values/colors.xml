@@ -46,4 +46,10 @@
     <color name="c21">#f28f25</color>
     <color name="c22">#86BA63</color>
     <color name="c23">#F4F4F4</color>
+
+    <!-- 选择菜单颜色样式-->
+    <color name="saddlebrown">#8B4513</color>
+    <color name="dodgerblue">#1E90FF</color>
+    <color name="red">#FF0000</color>
+    <color name="pink">#FFC0CB</color>
 </resources>

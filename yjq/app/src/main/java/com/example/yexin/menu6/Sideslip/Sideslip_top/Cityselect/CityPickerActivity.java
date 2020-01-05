@@ -73,8 +73,13 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
         setContentView(R.layout.cp_activity_city_list);
 
         initView();
+
+
+        Log.w("base","initView_执行");
         initData();
+        Log.w("base","initData_执行");
         getLocation();
+        Log.w("base","initgetLo_执行");
     }
     protected void initView() {
         mListView = findViewById(R.id.listview_all_city);
@@ -146,7 +151,7 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
                      ArrayList<City> cities_search = new ArrayList<>(citys_search);
                      mResultCityAdapter=new ResultListAdapter(CityPickerActivity.this,cities_search);
                      mResultListView.setAdapter(mResultCityAdapter);
-
+                     // 运用接口返回搜索结果的城市  接收返回值 **12138
                      mResultCityAdapter.setOnResultClickListener(new ResultListAdapter.OnResultClickListener(){
                          @Override
                          public void onCityClick(String name) {
@@ -184,6 +189,8 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
     }
 
     public void getCityData() {
+        Log.w("base","getCitydata_执行中1");
+
         String json = ReadAssetsFileUtil.getJson(this, "city.json");
         CityPickerBean bean = GsonUtil.getBean(json, CityPickerBean.class);
         HashSet<City> citys = new HashSet<>();
@@ -196,6 +203,8 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
                 citys.add(new City(childrenBeanX.id, childrenBeanX.name, PinyinUtils.getPinYin(childrenBeanX.name), childrenBeanX.is_hot == 1));
             }
         }
+
+        Log.w("base","getCitydata_执行中2");
         //set转换list
         ArrayList<City> cities = new ArrayList<>(citys);
         //按照字母排序
@@ -216,9 +225,9 @@ public class CityPickerActivity extends FragmentActivity implements View.OnClick
 
                 Toast.makeText(CityPickerActivity.this, name, Toast.LENGTH_SHORT).show();
 
-                Intent intent_ityselect = getIntent();
-                intent_ityselect.putExtra("city_name", name);
-                setResult(1, intent_ityselect);
+                Intent intent_ityselect=getIntent();
+                intent_ityselect.putExtra("city_name",name);
+                setResult(1,intent_ityselect);
                 finish();
             }
 

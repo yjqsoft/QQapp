@@ -36,12 +36,17 @@ public class SearchReasult {
 
 
 
+    private String location;//球馆坐标
+
+
+
 
 
 
     public SearchReasult(String no, String ballclub_name, String address, String distance, String price, String functionany,
                          String phone, String picture, String appraise,String ball,
-                         String server, String introduce, String sum, String floor, String ligth, String rest,String sell, String sellsport) {
+                         String server, String introduce, String sum, String floor, String ligth, String rest,String sell,
+                         String sellsport,String location) {
         this.no = no;
         this.ballclub_name = ballclub_name;
         this.address = address;
@@ -60,6 +65,7 @@ public class SearchReasult {
         this.rest=rest;
         this.sell = sell;
         this.sellsport = sellsport;
+        this.location=location;
     }
 
 
@@ -216,5 +222,13 @@ public class SearchReasult {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

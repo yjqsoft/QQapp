@@ -3,6 +3,7 @@ package com.example.yexin.menu6.Index.BaiduMap;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import com.baidu.mapapi.map.BaiduMap;
@@ -31,15 +32,16 @@ public class Stadium_location_show extends Activity {
         mBaiduMap = mMapView.getMap();
         Intent intent =getIntent();
         String  addressString=intent.getStringExtra("address");
-
+        String location=intent.getStringExtra("location");
         //用来构造InfoWindow的Button
         Button button = new Button(getApplicationContext());
         button.setBackgroundResource(R.drawable.popup);
         BitmapDescriptor bitmap = BitmapDescriptorFactory
                 .fromResource(R.drawable.icon_gcoding);
         button.setText(addressString);  //显示位置的信息
-        double a=28.7198450000;
-        double b=115.8305940000;
+        String []xy=location.split(",");
+        double a=new Double(xy[0]);
+        double b=new Double(xy[1]);
 //构造InfoWindow
 //point 描述的位置点
 //-100 InfoWindow相对于point在y轴的偏移量
@@ -60,7 +62,7 @@ public class Stadium_location_show extends Activity {
                 //要移动的点
                 .target(llText)//需要放大的位置
                 //放大地图到20倍
-                .zoom(50)
+                .zoom(30)
                 .build();
         //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);

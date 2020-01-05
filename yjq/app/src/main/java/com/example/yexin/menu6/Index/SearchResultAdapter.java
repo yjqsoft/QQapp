@@ -56,25 +56,22 @@ public class SearchResultAdapter extends BaseAdapter{
             holder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);
             holder.btn_order=(Button)convertView.findViewById(R.id.btn_order);
            final String  name=holder.tv_ballclub_name.getText().toString();
+            //在搜索的item中添加监听器   将数据传入场馆界面  实现跳转**12138
             holder.btn_order.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     /**/
-
                     Log.e("wz","hhj1"+mData.get(position).getNo());/*场馆编号获取到*/
                     Toast.makeText(mContext,"aaav"+mData.get(position).getNo(),Toast.LENGTH_SHORT).show();
 
 
                     Intent intent=new Intent(mContext,main_stadiums.class);
-                    Log.e("wz","position"+position);
+                    Log.e("wz","phone"+mData.get(position).getPhone());
                     intent.putExtra("position",""+position);
+                    intent.putExtra("phone",mData.get(position).getPhone());
                     main_stadiums.setmData(mData,mContext);
                     //intent.setClass(mContext,mData);
                     mContext.startActivity(intent);
-
-//                    Toast.makeText(mContext,mData.get(position).getBallclub_name(),Toast.LENGTH_SHORT).show();
-//                    Intent intent=new Intent(mContext,main_stadiums.class);
-//                    mContext.startActivity(intent);
                 }
             });
             convertView.setTag(holder);

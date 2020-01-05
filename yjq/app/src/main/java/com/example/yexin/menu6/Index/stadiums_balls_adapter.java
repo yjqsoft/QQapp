@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.yexin.menu6.BallClub_Information.Item.SelectDialog;
 import com.example.yexin.menu6.R;
 
 import java.util.LinkedList;
@@ -56,9 +57,11 @@ public class stadiums_balls_adapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     //界面跳转
-                    Toast.makeText(mContext,"那个第一步",Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(mContext,main_stadiums.class);
-                    mContext.startActivity(intent);
+                    final SelectDialog selectDialog=new SelectDialog(mContext);
+                    selectDialog.show();
+                    //Toast.makeText(mContext,"那个第一步",Toast.LENGTH_SHORT).show();
+                    //Intent intent=new Intent(mContext,main_stadiums.class);
+                    //mContext.startActivity(intent);
                 }
             });
             convertView.setTag(holder);

@@ -35,13 +35,14 @@ public class SearchActivity extends Activity {
     private Context mContext;
     private SearchResultAdapter mAdapter = null;
     private ListView search_result_listview;
+    private TextView tv_cancel;
+    private TextView t;
     private EditText et_searchmain;
     private ImageView iv_clear;
     private TextView tv_mainsearch;
 
     private JSONObject jsonObject=null;
     private JSONArray jsonArr=null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,26 @@ public class SearchActivity extends Activity {
         mContext = SearchActivity.this;
 
         init();
+
+
+//        tv_cancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent_cancel= new Intent(SearchActivity.this,MainActivity.class);
+//                startActivity(intent_cancel);
+//                finish();
+//            }
+//        });
         //搜索框的监听器
+
+//        mData=new LinkedList<SearchReasult>();
+//        mData.add(new SearchReasult("东华理工","五颗心","观澜大道","<100","￥100"));
+//        mData.add(new SearchReasult("东华理工","五颗心","观澜大道","<100","￥100"));
+//        mData.add(new SearchReasult("东华理工","五颗心","观澜大道","<100","￥100"));
+//        mData.add(new SearchReasult("东华理工","五颗心","观澜大道","<100","￥100"));
+//        mAdapter=new SearchResultAdapter((LinkedList<SearchReasult>) mData,mContext);
+       // search_result_listview.setAdapter(mAdapter);
+
         et_searchmain.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -70,6 +90,7 @@ public class SearchActivity extends Activity {
                 }
             }
         });
+        //加入  主页搜索的监听器  将数据从服务器取出  放入MData中**12138
         tv_mainsearch.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -108,7 +129,7 @@ public class SearchActivity extends Activity {
                                             jsonObject.getString("负责人电话"),jsonObject.getString("场馆图片"),jsonObject.getString("场馆评价"),jsonObject.getString("场馆球类型"),/*球类型未添加*/jsonObject.getString("场馆服务"),
                                             jsonObject.getString("场馆介绍"),jsonObject.getString("下单量"),jsonObject.getString("地板"),jsonObject.getString("灯光"),
                                             jsonObject.getString("休息区"),jsonObject.getString("售卖"),
-                                            jsonObject.getString("体育用品售卖")));
+                                            jsonObject.getString("体育用品售卖"),jsonObject.getString("坐标")));
                                 }
                    /*
                    * 此处不能运行*/
@@ -136,7 +157,6 @@ public class SearchActivity extends Activity {
                 }
             }
         });
-
         iv_clear.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -147,7 +167,6 @@ public class SearchActivity extends Activity {
 
             }
         });
-
         search_result_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -155,7 +174,6 @@ public class SearchActivity extends Activity {
             }
         });
     }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode==KeyEvent.KEYCODE_BACK ){
@@ -165,7 +183,8 @@ public class SearchActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);
     }
-    public void init() {
+    public void init() {//iv_search
+
         //tv_cancel=(TextView)findViewById(R.id.tv_cancel);//取消按钮
         //iv_clear=(ImageView)findViewById(R.id.iv_clear);//清除按钮
         search_result_listview =(ListView)findViewById(R.id.search_result_listview);

@@ -44,11 +44,11 @@ public class Login extends Activity {
     private String UserPassword=null;
     private User_public user_public=null;
 
-    @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.RECEIVE_SMS,Manifest.permission.READ_SMS,Manifest.permission.CAMERA})
+    @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.RECEIVE_SMS,Manifest.permission.READ_SMS,Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE})
     public void getSingle() {
         Toast.makeText(this, "权限申请成功", Toast.LENGTH_SHORT).show();
     }
-    @OnShowRationale({Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.RECEIVE_SMS,Manifest.permission.READ_SMS,Manifest.permission.CAMERA})
+    @OnShowRationale({Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.RECEIVE_SMS,Manifest.permission.READ_SMS,Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE})
     public void showSingleRationale(final PermissionRequest request) {
         new AlertDialog.Builder(this)
                 .setMessage("为了正常使用，将获取您的一些权限信息")

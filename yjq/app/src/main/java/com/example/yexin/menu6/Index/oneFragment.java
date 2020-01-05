@@ -61,9 +61,12 @@ public class oneFragment extends android.support.v4.app.Fragment implements OnBa
 
     /*
     * JSON数据的保存JSONObject jsonObject*/
-    private JSONObject jsonObject=null;
-    private JSONArray jsonArr=null;
+    private JSONObject jsonObject;
+    private JSONArray jsonArr;
+    private String num;
     public String name;
+    private static String address;
+    private String score;
 
     public oneFragment() {
         // Required empty public constructor
@@ -83,12 +86,61 @@ public class oneFragment extends android.support.v4.app.Fragment implements OnBa
         mData=new LinkedList<SearchReasult>();
 
         /*
-        * 将数据获取出来
+        * 将数据获取出来 **12138
         * **/
 
         //String jsonObject= Web_Json.Login(UserName,UserPassword);
+        RequestParams params = new RequestParams(Web_url.URL_Getmainactivity);
+        params.addHeader("Content-Type", "application/json-rpc"); //设置请求头部
+        params.setAsJsonContent(true);//设置为json内容(这句个本人感觉不加也没有影响)
+      //  params.setBodyContent(jsonObject);//添加json内容到请求参数里
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.e("yjq","网络请求成功"+result);  //接收JSON的字符串
+//               HashMap<String,String> map=Web_Json.getJson(result);
+                //HashMap<String,String> map=Web_Json.getJson(result);
+                Log.e("yjqresult:",result.toString());
 
-        StadiumItemDataAdapter("",mContext);
+                try{
+                    //int jsonSize = result.length();//获取数据组的长度
+                    for(int i=0;i<result.length();i++){
+                        jsonArr=new JSONArray(result);
+                        jsonObject = (JSONObject)jsonArr.getJSONObject(i);
+                        Log.e("数据的变化",jsonObject.getString("场馆编号"));
+                        Log.e("数据的变化",jsonObject.getString("场馆名"));
+                        Log.e("数据的变化",jsonObject.getString("场馆地址"));
+                        mData.add(new SearchReasult(jsonObject.getString("场馆编号"),jsonObject.getString("场馆名"),
+                                jsonObject.getString("场馆地址"),"<100","￥100",jsonObject.getString("场馆负责人"),
+                                jsonObject.getString("负责人电话"),jsonObject.getString("场馆图片"),jsonObject.getString("场馆评价"),jsonObject.getString("场馆球类型"),/*球类型未添加*/jsonObject.getString("场馆服务"),
+                                jsonObject.getString("场馆介绍"),jsonObject.getString("下单量"),jsonObject.getString("地板"),jsonObject.getString("灯光"),
+                                jsonObject.getString("休息区"),jsonObject.getString("售卖"),
+                                jsonObject.getString("体育用品售卖"),jsonObject.getString("坐标")));
+                    }
+                   /*
+                   * 此处不能运行*/
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.e("yjq1","失败");
+                Toast.makeText(mContext, "连接超时，请查看网络连接", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onCancelled(CancelledException cex) {
+                Log.e("yjq","取消");
+            }
+            @Override
+            public void onFinished() {
+                Log.e("yjq","完成");
+                mAdapter=new fragmentone_stadiums_adapter(mData,mContext);
+                fragmentone_select_listview.setAdapter(mAdapter);
+                //完成时候运行
+            }
+        });
+
         /*
         * 先运行外边的数据， 在运行返回的数据结果集result所以交换顺序  qzj*/
         //mData.add(new SearchReasult(name,"五颗心"+score,address,"<100","￥100"));
@@ -127,127 +179,6 @@ public class oneFragment extends android.support.v4.app.Fragment implements OnBa
 
     }
 
-    public void StadiumItemDataAdapter(String searchcontent,final Context m1Context){
-        if(searchcontent==null)
-        {
-
-            RequestParams params = new RequestParams(Web_url.URL_Getmainactivity);
-
-
-            try {
-
-                jsonObject = new JSONObject();
-                jsonObject.put("content","");
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-
-
-            params.addHeader("Content-Type", "application/json-rpc"); //设置请求头部
-            params.setAsJsonContent(true);//设置为json内容(这句个本人感觉不加也没有影响)
-            params.setBodyContent(jsonObject.toString());//添加json内容到请求参数里
-            x.http().post(params, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String result) {
-                    Log.e("yjq","网络请求成功"+result);  //接收JSON的字符串
-//               HashMap<String,String> map=Web_Json.getJson(result);
-                    //HashMap<String,String> map=Web_Json.getJson(result);
-                    Log.e("yjqresult:",result.toString());
-
-                    try{
-                        //int jsonSize = result.length();//获取数据组的长度
-                        for(int i=0;i<result.length();i++){
-                            jsonArr=new JSONArray(result);
-                            jsonObject = (JSONObject)jsonArr.getJSONObject(i);
-                            Log.e("数据的变化",jsonObject.getString("场馆编号"));
-                            Log.e("数据的变化",jsonObject.getString("场馆名"));
-                            Log.e("数据的变化",jsonObject.getString("场馆地址"));
-                            mData.add(new SearchReasult(jsonObject.getString("场馆编号"),jsonObject.getString("场馆名"),
-                                    jsonObject.getString("场馆地址"),"<100","￥100",jsonObject.getString("场馆负责人"),
-                                    jsonObject.getString("负责人电话"),jsonObject.getString("场馆图片"),jsonObject.getString("场馆评价"),jsonObject.getString("场馆球类型"),/*球类型未添加*/jsonObject.getString("场馆服务"),
-                                    jsonObject.getString("场馆介绍"),jsonObject.getString("下单量"),jsonObject.getString("地板"),jsonObject.getString("灯光"),
-                                    jsonObject.getString("休息区"),jsonObject.getString("售卖"),
-                                    jsonObject.getString("体育用品售卖")));
-                        }
-                   /*
-                   * 此处不能运行*/
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-                @Override
-                public void onError(Throwable ex, boolean isOnCallback) {
-                    Log.e("yjq1","失败");
-                    Toast.makeText(m1Context, "连接超时，请查看网络连接", Toast.LENGTH_SHORT).show();
-                }
-                @Override
-                public void onCancelled(CancelledException cex) {
-                    Log.e("yjq","取消");
-                }
-                @Override
-                public void onFinished() {
-                    Log.e("yjq","完成");
-                    mAdapter=new fragmentone_stadiums_adapter(mData,m1Context);
-                    fragmentone_select_listview.setAdapter(mAdapter);
-                    //完成时候运行
-                }
-            });
-        }
-        if(searchcontent!=null) {
-            RequestParams params = new RequestParams(Web_url.URL_Getmainactivity);
-            params.addHeader("Content-Type", "application/json-rpc"); //设置请求头部
-            params.setAsJsonContent(true);//设置为json内容(这句个本人感觉不加也没有影响)
-            //  params.setBodyContent(jsonObject);//添加json内容到请求参数里
-            x.http().post(params, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String result) {
-                    Log.e("yjq","网络请求成功"+result);  //接收JSON的字符串
-//               HashMap<String,String> map=Web_Json.getJson(result);
-                    //HashMap<String,String> map=Web_Json.getJson(result);
-                    Log.e("yjqresult:",result.toString());
-
-                    try{
-                        //int jsonSize = result.length();//获取数据组的长度
-                        for(int i=0;i<result.length();i++){
-                            jsonArr=new JSONArray(result);
-                            jsonObject = (JSONObject)jsonArr.getJSONObject(i);
-                            Log.e("数据的变化",jsonObject.getString("场馆编号"));
-                            Log.e("数据的变化",jsonObject.getString("场馆名"));
-                            Log.e("数据的变化",jsonObject.getString("场馆地址"));
-                            mData.add(new SearchReasult(jsonObject.getString("场馆编号"),jsonObject.getString("场馆名"),
-                                    jsonObject.getString("场馆地址"),"<100","￥100",jsonObject.getString("场馆负责人"),
-                                    jsonObject.getString("负责人电话"),jsonObject.getString("场馆图片"),jsonObject.getString("场馆评价"),jsonObject.getString("场馆球类型"),/*球类型未添加*/jsonObject.getString("场馆服务"),
-                                    jsonObject.getString("场馆介绍"),jsonObject.getString("下单量"),jsonObject.getString("地板"),jsonObject.getString("灯光"),
-                                    jsonObject.getString("休息区"),jsonObject.getString("售卖"),
-                                    jsonObject.getString("体育用品售卖")));
-                        }
-                   /*
-                   * 此处不能运行*/
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-                @Override
-                public void onError(Throwable ex, boolean isOnCallback) {
-                    Log.e("yjq1","失败");
-                    Toast.makeText(mContext, "连接超时，请查看网络连接", Toast.LENGTH_SHORT).show();
-                }
-                @Override
-                public void onCancelled(CancelledException cex) {
-                    Log.e("yjq","取消");
-                }
-                @Override
-                public void onFinished() {
-                    Log.e("yjq","完成");
-                    mAdapter=new fragmentone_stadiums_adapter(mData,mContext);
-                    fragmentone_select_listview.setAdapter(mAdapter);
-                    //完成时候运行
-                }
-            });
-        }
-
-    }
     //初始数据banner
     private void initDate_banner(){
         imagePath=new ArrayList<>();

@@ -74,6 +74,7 @@ import java.util.zip.Inflater;
 
 import static com.example.yexin.menu6.R.drawable.username;
 import static com.example.yexin.menu6.R.id.imageView_sideslip;
+import static com.example.yexin.menu6.R.id.toolbar;
 
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
     private ViewPager viewPager;
@@ -146,8 +147,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
          * 判断的线程，这里是判断长连接是否失效。启用线程，判断长连接用的
          */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //去除原有标题
-        toolbar.setTitle("");
+
         TextView tv_search = (TextView)findViewById(R.id.tv_search);
         tv_search.setOnClickListener(new OnClickListener() {
             @Override
@@ -192,10 +192,10 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        /*修改toolbar原有返回button*/
-
-        /*toggle.setHomeAsUpIndicator(R.drawable.icon_setting);*/
+        /*修改toggle原有顶部button*/
+        toggle.syncState();/*显示button*/
+        toggle.setDrawerIndicatorEnabled(false);/*取消原有button*/
+        toggle.setHomeAsUpIndicator(R.drawable.icon_setting);/*添加自己的button*/
         toggle.setToolbarNavigationClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
