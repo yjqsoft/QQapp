@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/QQapp.iml" filepath="$PROJECT_DIR$/QQapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app_jhd.iml" filepath="$PROJECT_DIR$/app_jhd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xutils/xutils.iml" filepath="$PROJECT_DIR$/xutils/xutils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yjq.iml" filepath="$PROJECT_DIR$/yjq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yjq212.iml" filepath="$PROJECT_DIR$/yjq212.iml" />
+    </modules>
+  </component>
+</project>
