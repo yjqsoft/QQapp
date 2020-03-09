@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/app_jhd.iml" filepath="$PROJECT_DIR$/app_jhd.iml" />
       <module fileurl="file://$PROJECT_DIR$/xutils/xutils.iml" filepath="$PROJECT_DIR$/xutils/xutils.iml" />
       <module fileurl="file://$PROJECT_DIR$/yjq.iml" filepath="$PROJECT_DIR$/yjq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yjq212.iml" filepath="$PROJECT_DIR$/yjq212.iml" />
     </modules>
   </component>
 </project>

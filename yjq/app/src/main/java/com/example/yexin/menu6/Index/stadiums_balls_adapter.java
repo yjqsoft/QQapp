@@ -2,6 +2,7 @@ package com.example.yexin.menu6.Index;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class stadiums_balls_adapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder=null;
         if(convertView==null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.stadiums_balls, parent, false);
@@ -57,7 +58,9 @@ public class stadiums_balls_adapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     //界面跳转
-                    final SelectDialog selectDialog=new SelectDialog(mContext);
+                    final SelectDialog selectDialog=new SelectDialog(mContext,mData.get(position).getBallclub_ballname()+" "+mData.get(position).getBallclub_no()+" "+mData.get(position).getBallclub_name()+" "+mData.get(position).getBallclub_prices());
+                    Log.e("yd_btn","预定在这个位置");
+                    Toast.makeText(mContext, mData.get(position).getBallclub_ballname(), Toast.LENGTH_SHORT).show();
                     selectDialog.show();
                     //Toast.makeText(mContext,"那个第一步",Toast.LENGTH_SHORT).show();
                     //Intent intent=new Intent(mContext,main_stadiums.class);

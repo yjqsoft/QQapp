@@ -45,6 +45,7 @@ public class Stadium_location_show extends Activity {
 //构造InfoWindow
 //point 描述的位置点
 //-100 InfoWindow相对于point在y轴的偏移量
+        Log.e("zbzb",a+"DDD"+b);
         LatLng llText = new LatLng(a,b);
         //自定义位置（坐标）
         mInfoWindow = new InfoWindow(button, llText, -150);//信息描述的位置

@@ -27,7 +27,11 @@ public  class Web_url {
     public static String URL_Modifyinfo="http://192.168.137.1:8080/ByteSoft_two/ModifyInfomation";
     public static String URL_ReallyInfo="http://192.168.137.1:8080/ByteSoft_two/ReallyInfo";
 
-    public static String URL_Getsearchdata="http://192.168.43.42:8080/ByteSoft_two/GetSearchData";
-    public static String URL_Getmainactivity="http://192.168.43.42:8080/ByteSoft_two/GetMainActivityData";
-    public static String URL_Getgymnasium="http://192.168.43.42:8080/ByteSoft_two/Getgymnasiuma";//192.168.137.1
+    public static String URL_Getsearchdata="http://192.168.137.1:8080/ByteSoft_two/GetSearchData";
+    public static String URL_Getmainactivity="http://192.168.137.1:8080/ByteSoft_two/GetMainActivityData";
+    public static String URL_Getgymnasium="http://192.168.137.1:8080/ByteSoft_two/Getgymnasiuma";//192.168.137.1
+    public static String URL_GetABCball="http://192.168.137.1:8080/ByteSoft_two/GetABCball";
+    public static String URL_GetReserveOrder="http://192.168.137.1:8080/ByteSoft_two/GetReserveOrder";
+    public static String URL_AddGorderData="http://192.168.137.1:8080/ByteSoft_two/AddGorderData";
+    public static String URL_URL_Alterorder="http://192.168.137.1:8080/ByteSoft_two/Alterorder";
 }

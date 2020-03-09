@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -33,17 +35,22 @@ public class main_stadiums extends Activity implements OnBannerListener {
     //mData,mContext,mAdapter,fragmentone_select_listview 演示数据，界面，数据适配，列表
     private LinkedList<stadiums_balls> mData=null;
     private LinkedList<userinfo_adapter> mDate2=null;
+    private ArrayList<Integer> imagePath=null;
+    public static LinkedList<SearchReasult> mDatainformation;
+
     private Context mContext;
+
     private stadiums_balls_adapter mAdapter = null;
     private stadiums_evalutes_adapter mAdapter2=null;
-    private ListView list_ballsselect,list_user_evalutes;
-    private ArrayList<Integer> imagePath=null;
 
+    private ListView list_ballsselect,list_user_evalutes;
     private TextView ballclub_name1,address,distance,facility,server;
-    private ImageView iv_stadium_location,iv_stadium_phone;
+    private ImageView iv_stadium_location,iv_stadium_phone,ball_collect,back;
+
+
     private int positionInt;
     private String phone;
-    public static LinkedList<SearchReasult> mDatainformation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +83,11 @@ public class main_stadiums extends Activity implements OnBannerListener {
         //球类适配器
         mData=new LinkedList<stadiums_balls>();
         if(mDatainformation.get(positionInt).getBall().indexOf("A")!=-1)
-            mData.add(new stadiums_balls("羽毛球","￥100"));
+            mData.add(new stadiums_balls("羽毛球","￥100",mDatainformation.get(positionInt).getNo(),mDatainformation.get(positionInt).getBallclub_name()));
         if (mDatainformation.get(positionInt).getBall().indexOf("B")!=-1)
-            mData.add(new stadiums_balls("足球","￥100"));
+            mData.add(new stadiums_balls("足球","￥100",mDatainformation.get(positionInt).getNo(),mDatainformation.get(positionInt).getBallclub_name()));
         if (mDatainformation.get(positionInt).getBall().indexOf("C")!=-1)
-            mData.add(new stadiums_balls("网球","￥100"));
+            mData.add(new stadiums_balls("网球","￥100",mDatainformation.get(positionInt).getNo(),mDatainformation.get(positionInt).getBallclub_name()));
         mAdapter=new stadiums_balls_adapter(mData,mContext);
         list_ballsselect.setAdapter(mAdapter);
         Banner banner=(Banner)findViewById(R.id.stadiums_banner);
@@ -135,6 +142,26 @@ public class main_stadiums extends Activity implements OnBannerListener {
                 }
             }
         });
+        back.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent_back = new Intent(main_stadiums.this,  MainActivity.class);
+                startActivity(intent_back);
+                finish();
+            }
+        });
+        ball_collect.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                /**
+                 * 功能未实现
+                 * */
+                //获取用户id  球馆id mDatainformation.get(positionInt).getNo()，球馆名mDatainformation.get(positionInt).getBallclub_name()
+                //加入到数据库表中去
+                //每次点击 状态为 收藏/不收藏
+                Toast.makeText(main_stadiums.this,"收藏"+mDatainformation.get(positionInt).getNo()+" "+mDatainformation.get(positionInt).getBallclub_name(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
@@ -159,6 +186,8 @@ public class main_stadiums extends Activity implements OnBannerListener {
         server=(TextView)findViewById(R.id.tv_server);
         iv_stadium_location=(ImageView)findViewById(R.id.iv_stadium_location);
         iv_stadium_phone=(ImageView)findViewById(R.id.iv_stadium_phone);
+        ball_collect=(ImageView)findViewById(R.id.ball_collect);
+        back=(ImageView)findViewById(R.id.back);
 
 
     }

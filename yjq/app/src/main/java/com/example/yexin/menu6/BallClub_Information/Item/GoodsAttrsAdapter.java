@@ -26,7 +26,7 @@ public class GoodsAttrsAdapter extends BaseRecyclerAdapter<GoodsAttrsBean.Attrib
     private SimpleArrayMap<Integer, String> saveClick;
 
     private List<GoodsAttrsBean.StockGoodsBean> stockGoodsList;//商品数据集合
-    private String[] selectedValue;   //选中的属性
+    public String[] selectedValue;   //选中的属性
     private TextView[][] childrenViews;    //二维 装所有属性
 
     private final int SELECTED = 0x100;
@@ -40,6 +40,7 @@ public class GoodsAttrsAdapter extends BaseRecyclerAdapter<GoodsAttrsBean.Attrib
         selectedValue = new String[list.size()];
         Log.e("qwe3",selectedValue.toString());
         for (int i = 0; i < list.size(); i++) {
+            //Log.e("qwe31",i+"："+selectedValue[i]);
             selectedValue[i] = "";
         }
     }
@@ -90,9 +91,7 @@ public class GoodsAttrsAdapter extends BaseRecyclerAdapter<GoodsAttrsBean.Attrib
     private class MyOnClickListener implements View.OnClickListener {
         //点击操作 选中SELECTED   取消CANCEL
         private int operation;
-
         private int positionG;
-
         private int positionC;
 
         public MyOnClickListener(int operation, int positionG, int positionC) {
@@ -106,16 +105,34 @@ public class GoodsAttrsAdapter extends BaseRecyclerAdapter<GoodsAttrsBean.Attrib
             focusPositionG = positionG;
             focusPositionC = positionC;
             String value = childrenViews[positionG][positionC].getText().toString();
+            Log.e("textview4",value);
             switch (operation) {
                 case SELECTED:
                     saveClick.put(positionG, positionC + "");
                     selectedValue[positionG] = value;
                     myInterface.selectedAttribute(selectedValue);
+                    Log.e("textview5value",value);
+                    Log.e("textview5selectedValue",selectedValue.toString());
+                    Log.e("textview5positionG",positionG+":G1");
+                    Log.e("textview5positionC",positionC+":C");
+                    for (int i = 0; i < selectedValue.length; i++) {
+                        Log.e("textview7sedValuew", selectedValue[i]);
+                        if (selectedValue[i].equals(value)) {
+                            Log.e("textview7value", value);
+                            Log.e("textview7selectedValue", selectedValue[i]);
+                        }
+                    }
+//                    if(selectedValue[positionG]!=null)
+//                    Log.e("textview5selectG",selectedValue[positionG]+":G");
+//                    if(selectedValue[positionC]!=null)
+//                    Log.e("textview5selectC",selectedValue[positionC]+":C");
                     break;
                 case CANCEL:
                     saveClick.put(positionG, "");
                     for (int l = 0; l < selectedValue.length; l++) {
                         if (selectedValue[l].equals(value)) {
+                            Log.e("textview6value",value);
+                            Log.e("textview6selectedValue",selectedValue.toString());
                             selectedValue[l] = "";
                             break;
                         }
@@ -131,17 +148,12 @@ public class GoodsAttrsAdapter extends BaseRecyclerAdapter<GoodsAttrsBean.Attrib
 
 
     class MyOnFocusChangeListener implements View.OnFocusChangeListener {
-
         private int positionG;
-
         private int positionC;
-
-
         public MyOnFocusChangeListener(int positionG, int positionC) {
             this.positionG = positionG;
             this.positionC = positionC;
         }
-
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             String clickpositionC = saveClick.get(positionG);
@@ -178,6 +190,7 @@ public class GoodsAttrsAdapter extends BaseRecyclerAdapter<GoodsAttrsBean.Attrib
                 textView.setEnabled(false);
                 textView.setFocusable(false);
                 textView.setTextColor(ContextCompat.getColor(mContext, R.color.gray));//变灰
+                Log.e("textview",textView.getText().toString());
             }
         }
     }
@@ -208,9 +221,11 @@ public class GoodsAttrsAdapter extends BaseRecyclerAdapter<GoodsAttrsBean.Attrib
                         if (goodsInfo.get(i).getTabValue().equals(name)) {
                             textView.setEnabled(true);//符合就变成可点击
                             textView.setFocusable(true); //设置可以获取焦点
+                            Log.e("textview1",textView.getText().toString());
                             //不要让焦点乱跑
                             if (focusPositionG == i && focusPositionC == n) {
                                 textView.setTextColor(ContextCompat.getColor(mContext, R.color.colorBlack));
+                                Log.e("textview2",textView.getText().toString());
                                 textView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorGray));
                                 textView.requestFocus();
                             } else {
@@ -240,6 +255,7 @@ public class GoodsAttrsAdapter extends BaseRecyclerAdapter<GoodsAttrsBean.Attrib
                     if (selectedValue[m].equals(value)) {
                         textView.setTextColor(ContextCompat.getColor(mContext, R.color.colorWhite));
                         textView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorBlue));
+                        Log.e("textview3",textView.getText().toString());
                         textView.setOnClickListener(new MyOnClickListener(CANCEL, i, j) {
                         });
                     }

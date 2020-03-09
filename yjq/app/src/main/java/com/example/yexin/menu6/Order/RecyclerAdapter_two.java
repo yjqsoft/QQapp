@@ -37,12 +37,32 @@ public class RecyclerAdapter_two extends RecyclerView.Adapter<RecyclerAdapter_tw
     public void onBindViewHolder(AuthorViewHolder holder, int position) {
         holder.mOrderNumber.setText(mData.get(position).getOrder_num());
         holder.mOrderTime.setText(mData.get(position).getOrder_time());
-        holder.mOrderType.setText(mData.get(position).getOrder_type());
+        if(mData.get(position).getOrder_type().equals("A")){
+            holder.mOrderType.setText("羽毛球");
+        }
+        else if(mData.get(position).getOrder_type().equals("B")){
+            holder.mOrderType.setText("篮球");
+        }
+        else if(mData.get(position).getOrder_type().equals("C")){
+            holder.mOrderType.setText("足球");
+        }
+        else if(mData.get(position).getOrder_type().equals("D")){
+            holder.mOrderType.setText("D球");
+        }
+        else if(mData.get(position).getOrder_type().equals("E")){
+            holder.mOrderType.setText("E球");
+        }
+       else if(mData.get(position).getOrder_type().equals("F")){
+            holder.mOrderType.setText("F球");
+        }
+        else{
+            holder.mOrderType.setText(null);
+        }
         holder.mOrderLocation.setText(mData.get(position).getOrder_location());
         holder.mOrderAppointmentTime.setText(mData.get(position).getOrder_appointment_time());
         holder.mOrderSiteNumber.setText(mData.get(position).getOrder_site_num());
         holder.mOrderPrice.setText(mData.get(position).getOrder_price());
-
+        holder.mOrderStatus.setText("已支付");
     }
 
     @Override
@@ -58,6 +78,7 @@ public class RecyclerAdapter_two extends RecyclerView.Adapter<RecyclerAdapter_tw
         TextView mOrderAppointmentTime;
         TextView mOrderSiteNumber;
         TextView mOrderPrice;
+        TextView mOrderStatus;
         Button mBtnPay;
         public AuthorViewHolder(View itemView) {
             super(itemView);
@@ -68,6 +89,7 @@ public class RecyclerAdapter_two extends RecyclerView.Adapter<RecyclerAdapter_tw
             mOrderAppointmentTime = (TextView) itemView.findViewById(R.id.appointment_time);
             mOrderSiteNumber = (TextView) itemView.findViewById(R.id.site_num);
             mOrderPrice = (TextView) itemView.findViewById(R.id.order_price);
+            mOrderStatus=(TextView)itemView.findViewById(R.id.order_status);
             mBtnPay = (Button)itemView.findViewById(R.id.btn_pay);
 
         }

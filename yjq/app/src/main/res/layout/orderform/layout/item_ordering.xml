@@ -173,7 +173,6 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/tv_order_status"
             android:layout_marginStart="10dp"
-            android:text="待支付"
             android:textSize="16sp"
             android:textColor="@color/colorBlack" />
         <Button

@@ -48,7 +48,7 @@ import java.util.List;
 public class oneFragment extends android.support.v4.app.Fragment implements OnBannerListener {
     //mData,mContext,mAdapter,fragmentone_select_listview 演示数据，界面，数据适配，列表
     private LinkedList<SearchReasult> mData=null;
-    private Context mContext;
+    private static Context mContext;
     private fragmentone_stadiums_adapter mAdapter = null;
     private ListView fragmentone_select_listview;
     private ArrayList<String> imageTitle;
@@ -101,17 +101,20 @@ public class oneFragment extends android.support.v4.app.Fragment implements OnBa
 //               HashMap<String,String> map=Web_Json.getJson(result);
                 //HashMap<String,String> map=Web_Json.getJson(result);
                 Log.e("yjqresult:",result.toString());
-
+                Log.e("yjqresult:","长度："+result.length());
                 try{
                     //int jsonSize = result.length();//获取数据组的长度
-                    for(int i=0;i<result.length();i++){
-                        jsonArr=new JSONArray(result);
+                    jsonArr=new JSONArray(result);
+                    for(int i=0;i<jsonArr.length();i++){
+
+                        Log.e("yjqresult:","jsonArr长度："+jsonArr.length());
                         jsonObject = (JSONObject)jsonArr.getJSONObject(i);
+                        Log.e("yjqresult:",i+"jsonObject："+jsonObject.toString());
                         Log.e("数据的变化",jsonObject.getString("场馆编号"));
                         Log.e("数据的变化",jsonObject.getString("场馆名"));
                         Log.e("数据的变化",jsonObject.getString("场馆地址"));
                         mData.add(new SearchReasult(jsonObject.getString("场馆编号"),jsonObject.getString("场馆名"),
-                                jsonObject.getString("场馆地址"),"<100","￥100",jsonObject.getString("场馆负责人"),
+                                jsonObject.getString("场馆地址"),"距离<100","￥100",jsonObject.getString("场馆负责人"),
                                 jsonObject.getString("负责人电话"),jsonObject.getString("场馆图片"),jsonObject.getString("场馆评价"),jsonObject.getString("场馆球类型"),/*球类型未添加*/jsonObject.getString("场馆服务"),
                                 jsonObject.getString("场馆介绍"),jsonObject.getString("下单量"),jsonObject.getString("地板"),jsonObject.getString("灯光"),
                                 jsonObject.getString("休息区"),jsonObject.getString("售卖"),
