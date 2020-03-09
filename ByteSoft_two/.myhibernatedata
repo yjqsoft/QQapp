@@ -1,0 +1,20 @@
+#MyEclipse Hibernate Properties
+#Sat Mar 07 17:58:23 CST 2020
+reStrategyClass=
+detectM2M=false
+createConfigFile=true
+reSettingsFile=/ByteSoft_two/hibernate.reveng.xml
+profile=
+keyGenerator=assigned
+genAnnotations=false
+detectO2O=false
+useJavaTypes=true
+sessionFactoryId=
+jndiPath=
+springDaoFile=
+basePersistenceClass=
+configFile=/ByteSoft_two/src/hibernate.cfg.xml
+daoSFId=
+sessionFactoryName=org.ov.HibernateSessionFactory
+genBasicCompId=false
+genVersionTag=false
