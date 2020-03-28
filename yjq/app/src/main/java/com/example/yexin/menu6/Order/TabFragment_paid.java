@@ -100,7 +100,7 @@ public class TabFragment_paid extends Fragment{
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-                mData.add(new Order("121385","54644846","拍球","抚州","8:39~10:00","5号场","￥110.00","待支付"));
+                mData.add(new Order("121385","54644846","C","抚州","8:39~10:00","5号场","￥110.00","待支付"));
             }
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {

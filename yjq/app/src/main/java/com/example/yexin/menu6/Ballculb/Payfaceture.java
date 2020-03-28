@@ -17,6 +17,7 @@ import com.example.yexin.menu6.Common.GetSystemTime;
 import com.example.yexin.menu6.Common.Url.Web_url;
 import com.example.yexin.menu6.Index.SearchReasult;
 import com.example.yexin.menu6.Index.SearchResultAdapter;
+import com.example.yexin.menu6.Index.main_stadiums;
 import com.example.yexin.menu6.R;
 
 import org.json.JSONArray;
@@ -50,6 +51,7 @@ public class Payfaceture extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ballculb);
+
         Intent intent=getIntent();
         String ballNo=intent.getStringExtra("ballNo");
         String  changguan1=intent.getStringExtra("changguan");//接受的值
@@ -60,19 +62,25 @@ public class Payfaceture extends Activity {
         String time_quantum=intent.getStringExtra("time_quantum");
         Log.e("ballNo",ballNo);
         Log.e("ball_time_quantum",time_quantum);
-        String SystemTime=GetSystemTime.GetSystemTime();
-        String price[]=jiage1.split("￥");
+        String SystemTime=GetSystemTime.GetSystemTime(main_stadiums.TimeStatus);
+        Log.e("timeSystemTime",SystemTime);
+        String Time[]=SystemTime.split("￥");
+        String Nowtime=Time[0];
+        String Endtime=Time[1];
+        //String price[]=jiage1.split("￥");
         Log.e("time",jiage1.replaceAll("￥", ""));
         Log.e("time",(jiage1.replaceAll("￥", "")).length()+"长度");
-        Log.e("time1",ExchangeBallType(ball_kind));
-        chunkdate=setdate("18879942330",ballNo,changdi1,time_quantum,ExchangeBallType(ball_kind),SystemTime,changguan1,jiage1.replaceAll("￥", ""));
+
+       // Log.e("timeday","day:"+ main_stadiums.TimeStatus);
+
+        chunkdate=setdate("18879942330",ballNo,changdi1,time_quantum,ExchangeBallType(ball_kind),Nowtime,Endtime,changguan1,jiage1.replaceAll("￥", ""));
         init();
 
 
 
         changguan.setText(changguan1);
         xiangmu.setText(ball_kind);
-        riqi.setText(SystemTime);
+        riqi.setText(Nowtime);
         changdi.setText(changdi1);
         jiage.setText(jiage1);
         //选择支付方式
@@ -136,7 +144,7 @@ public class Payfaceture extends Activity {
         jiage=(TextView)findViewById(R.id.jiage);
 
     }
-    public String setdate(String userId,String no,String place,String time,String Class,String appointment,String site,String money){
+    public String setdate(String userId,String no,String place,String time,String Class,String appointment,String endappointment,String site,String money){
         JSONObject jsonObject=null;
         try {
             jsonObject = new JSONObject();
@@ -146,6 +154,7 @@ public class Payfaceture extends Activity {
             jsonObject.put("time",time);
             jsonObject.put("Class",Class);
             jsonObject.put("appointment",appointment);
+            jsonObject.put("endappointment",endappointment);
             jsonObject.put("site",site);
             jsonObject.put("money",money);
             jsonObject.put("pay","0");

@@ -67,7 +67,7 @@
             android:layout_marginLeft="100dp"
             android:text="预定"
             android:textSize="15sp"
-            android:background="@color/colorAccent"
+            android:background="@drawable/button_reserverbg"
             android:textColor="@color/white"
             android:layout_marginEnd="30dp"
             android:layout_alignParentTop="true"

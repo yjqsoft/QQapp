@@ -1,0 +1,25 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yexin.menu6.Index.fragmenttwo_fourballs.Fragmenttwo_badminton">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gg_srfl"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
+
+    <ListView
+        android:background="@color/colorGray"
+        android:id="@+id/fragmenttwo_listview_badmintoninfo"
+        android:layout_width="match_parent"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:layout_height="match_parent">
+
+    </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</FrameLayout>

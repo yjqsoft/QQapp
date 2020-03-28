@@ -16,6 +16,7 @@ import org.table.Gorder;
 
 import DateBase.DataBase_Altertable;
 import DateBase.DateBase_Addtable;
+import DateBase.DateBase_Gettable;
 import net.sf.json.JSONObject;
 
 public class Alterorder implements Controller {
@@ -50,19 +51,28 @@ public class Alterorder implements Controller {
 					try {
 																		     
 						Gorder gorder =(Gorder)session.get(Gorder.class, Integer.parseInt(json.getString("order_no")));
+						
+						String stadium_no=gorder.getOno();
+						String place=gorder.getOplace().substring(0, 1);
+						String time=gorder.getOtime().substring(0, 1);
+						String table_type=gorder.getOclass();
+						
 						gorder.setOpay("1");
 				        session.update(gorder);
 						tran.commit();
 						session.clear();
+						session.close();
 						
-						
+						System.out.print("修改ABC数据为："+stadium_no+" "+place+" "+time+" "+table_type);
+						if(DataBase_Altertable.AlterABC(stadium_no,place,time,table_type)) {
+							System.out.print("修改ABC数据成功");
+						}
 						} catch (Exception e) {
 							tran.rollback();
 							e.printStackTrace();
-						}finally{
-							session.close();
 						}
 					//删除
+					response.getWriter().append("SUCCESS");	
 				}
 		}else {
 			System.out.println("---GET方法进入---");

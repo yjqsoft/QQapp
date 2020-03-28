@@ -19,11 +19,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Author
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View childView = inflater.inflate(R.layout.item, parent, false);
         AuthorViewHolder viewHolder = new AuthorViewHolder(childView);
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(AuthorViewHolder holder, int position) {
+
     }
 
     @Override
@@ -39,12 +41,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Author
 
     class AuthorViewHolder extends RecyclerView.ViewHolder {
 
-
         public AuthorViewHolder(View itemView) {
             super(itemView);
-
-
-
 
         }
     }

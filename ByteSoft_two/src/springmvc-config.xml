@@ -19,7 +19,12 @@
 	<bean class="org.getdata.Getgymnasium" name="/Getgymnasium"/>
 	<bean class="org.getdata.GetReserveOrder" name="/GetReserveOrder"/>
 	<bean class="org.getdata.GetABCball" name="/GetABCball"/>
+	<bean class="org.getdata.GetPersonalCollection" name="/GetPersonalCollection"/>
+	<bean class="org.getdata.Getgame" name="/Getgame"/>
+	<bean class="org.getdata.Getgamedetails" name="/Getgamedetails"/>
 	<bean class="org.adddata.AddGorderData" name="/AddGorderData"/>
+	<bean class="org.adddata.AddCollection" name="/AddCollection"/>
+	<bean class="org.adddata.AddJoinGame" name="/AddJoinGame"/>
 	<bean class="org.altertable.Alterorder" name="/Alterorder"/>
-		
+
 </beans>

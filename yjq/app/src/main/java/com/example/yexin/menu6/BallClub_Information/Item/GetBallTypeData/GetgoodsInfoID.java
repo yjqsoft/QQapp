@@ -24,7 +24,7 @@ public class GetgoodsInfoID {
     public static String getgoodsInfoId(String placenum,String placetiem){
 
         jsonArray_goodsInfo=new JSONArray();
-        jsonArray_goodsInfo.put(GetgoodsInfo.getTime(placetiem+"-"+(1+Integer.parseInt(placetiem))));
+        jsonArray_goodsInfo.put(GetgoodsInfo.getTime(placetiem+"∶00-"+(1+Integer.parseInt(placetiem))+"∶00"));
         jsonArray_goodsInfo.put(GetgoodsInfo.getPlace(placenum+"号场"));
 
         return jsonArray_goodsInfo.toString();

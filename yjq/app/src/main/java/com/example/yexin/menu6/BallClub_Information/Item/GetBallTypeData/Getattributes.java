@@ -14,7 +14,9 @@ public class Getattributes {
 
 
     public static String Getattributes(String place[]){
-        String  time [] ={"7-8","8-9","9-10","10-11","11-12","12-13","13-14","14-15","15-16","16-17","17-18","18-19","19-20","20-21","21-22"};
+        String  time [] ={"7∶00-8∶00","8∶00-9∶00","9∶00-10∶00","10∶00-11∶00","11∶00-12∶00",
+                "12∶00-13∶00","13∶00-14∶00","14∶00-15∶00","15∶00-16∶00","16∶00-17∶00",
+                "17∶00-18∶00","18∶00-19∶00","19∶00-20∶00","20∶00-21∶00","21∶00-22∶00"};
         //String place []={"1号场","2号场","3号场"};
         jsonArray_attributes=new JSONArray();
         jsonArray_attributes.put(attributes.Gettime(time));

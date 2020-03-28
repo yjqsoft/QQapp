@@ -32,6 +32,10 @@ public  class Web_url {
     public static String URL_Getgymnasium="http://192.168.137.1:8080/ByteSoft_two/Getgymnasiuma";//192.168.137.1
     public static String URL_GetABCball="http://192.168.137.1:8080/ByteSoft_two/GetABCball";
     public static String URL_GetReserveOrder="http://192.168.137.1:8080/ByteSoft_two/GetReserveOrder";
+    public static String URL_Getgame="http://192.168.137.1:8080/ByteSoft_two/Getgame";
+    public static String URL_Getgamedetails ="http://192.168.137.1:8080/ByteSoft_two/Getgamedetails";
     public static String URL_AddGorderData="http://192.168.137.1:8080/ByteSoft_two/AddGorderData";
+    public static String URL_AddCollection="http://192.168.137.1:8080/ByteSoft_two/AddCollection";
     public static String URL_URL_Alterorder="http://192.168.137.1:8080/ByteSoft_two/Alterorder";
+    public static String URL_AddJoinGame="http://192.168.137.1:8080/ByteSoft_two/AddJoinGame";
 }

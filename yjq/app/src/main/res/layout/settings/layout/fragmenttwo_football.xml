@@ -1,0 +1,18 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yexin.menu6.Index.fragmenttwo_fourballs.Fragmenttwo_football">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ListView
+        android:background="@color/colorGray"
+        android:id="@+id/fragmenttwo_listview_footballinfo"
+        android:layout_width="match_parent"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</FrameLayout>

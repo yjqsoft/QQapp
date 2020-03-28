@@ -121,28 +121,42 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+
+
+                <Button
+                    android:id="@+id/btn_day1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="10dp"
+                    android:background="@color/white"
+                    android:textColor="@color/theme_gray"
+
                     android:text="今天" />
 
-                <TextView
+                <Button
+                    android:id="@+id/btn_day2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="10dp"
+                    android:background="@color/white"
+                    android:textColor="@color/theme_gray"
+
                     android:text="明天" />
 
-                <TextView
+                <Button
+                    android:id="@+id/btn_day3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="10dp"
+                    android:background="@color/white"
+                    android:textColor="@color/theme_gray"
+
                     android:text="后天" />
             </LinearLayout>
             //球馆包含的球类

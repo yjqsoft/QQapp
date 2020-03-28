@@ -25,8 +25,11 @@
         <property name="oclass" type="java.lang.String">
             <column name="OClass" length="1" not-null="true" />
         </property>
-        <property name="oappointment" type="java.sql.Timestamp">
-            <column name="OAppointment" length="19" not-null="true" />
+        <property name="oappointmenttime" type="java.util.Date">
+            <column name="OAppointmenttime" length="10" not-null="true" />
+        </property>
+        <property name="oendAppointmenttime" type="java.sql.Timestamp">
+            <column name="OendAppointmenttime" length="19" />
         </property>
         <property name="osite" type="java.lang.String">
             <column name="OSite" length="50" not-null="true" />

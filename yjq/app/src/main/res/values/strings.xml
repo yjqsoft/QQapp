@@ -206,5 +206,8 @@
         ]
         }
     ]
-}</string>
+}
+
+        <string name="refresh">加载中...</string>
+    </string>
 </resources>

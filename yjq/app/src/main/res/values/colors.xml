@@ -52,4 +52,7 @@
     <color name="dodgerblue">#1E90FF</color>
     <color name="red">#FF0000</color>
     <color name="pink">#FFC0CB</color>
+
+    <color name="colorSlashRed">#f7977a</color>
+    <color name="colorRed">#f00</color>
 </resources>

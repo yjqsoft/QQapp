@@ -79,9 +79,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Author
             public void onClick(View view) {
                 Log.e("order","sdfdghjk"+mData.get(position).getOrder_location());
                 JSONObject jsonObject=null;
-                RequestParams params = new RequestParams(Web_url.URL_URL_Alterorder);
-                params.addHeader("Content-Type", "application/json-rpc"); //设置请求头部
-                params.setAsJsonContent(true);//设置为json内容(这句个本人感觉不加也没有影响)
                 try {
                     jsonObject=new JSONObject();
                     jsonObject.put("order_no",mData.get(position).getOrder_num());
@@ -89,6 +86,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Author
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                RequestParams params = new RequestParams(Web_url.URL_URL_Alterorder);
+                params.addHeader("Content-Type", "application/json-rpc"); //设置请求头部
+                params.setAsJsonContent(true);//设置为json内容(这句个本人感觉不加也没有影响)
+
                 params.setBodyContent(jsonObject.toString());//添加json内容到请求参数里
                 x.http().post(params, new Callback.CommonCallback<String>() {
                     @Override
@@ -105,6 +106,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Author
 //                        }catch (Exception e){
 //                            e.printStackTrace();
 //                        }
+                        if(result!=null){
+                            Toast.makeText(mContext, "支付成功", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     @Override
                     public void onError(Throwable ex, boolean isOnCallback) {
@@ -118,7 +123,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Author
                     @Override
                     public void onFinished() {
                         Log.e("yjq","完成");
-
 
                         //完成时候运行
                     }

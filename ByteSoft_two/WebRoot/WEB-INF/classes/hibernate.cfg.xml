@@ -31,6 +31,10 @@
 		<mapping resource="org/table/Gymnasium.hbm.xml" />
 		<mapping resource="org/table/A.hbm.xml" />
 		<mapping resource="org/table/C.hbm.xml" />
+		<mapping resource="org/table/Collection.hbm.xml" />
+		<mapping resource="org/table/Game.hbm.xml" />
+		<mapping resource="org/table/Gamedetails.hbm.xml" />
+		<mapping resource="org/table/Joingame.hbm.xml" />
 
 
 	</session-factory>

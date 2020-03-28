@@ -1,5 +1,9 @@
 package org.getdata;
 
+
+/*
+ * 未使用此功能
+ * */
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,21 +33,23 @@ public class Getgymnasium implements Controller{
 		        
 		System.out.println("数据请求的方法："+Method);
 		
-		if(true/*"POST".equals(Method)*/)  {
+		if("POST".equals(Method.toString()))  {
 			System.out.println("------POST的方法进入------");
 			String read=""; //解析的Json报文
-			DateBase_Gettable gymnasium=new DateBase_Gettable();
-			//read=Json.SetJson(request.getReader());
-	       // JSONObject json = JSONObject.fromObject(read);
-	        //System.out.println("App端的Json数据"+json);
-	        //String num=json.getString("num");
-			String num="201720180321";
-	        if(gymnasium.getGymnasium(num)!=null) {
-	        	/*
-	        	 * 返回获取的场馆信息*/
-	        	System.out.println("场馆表中的内容为:"+gymnasium.getGymnasium(num));
-	        	response.getWriter().append(gymnasium.getGymnasium(num));	
-	        }
+			//DateBase_Gettable gymnasium=new DateBase_Gettable();
+//			read=Json.SetJson(request.getReader());
+//	        JSONObject json = JSONObject.fromObject(read);
+//	        System.out.println("App端的Json数据"+json);
+//	        String num=json.getString("userid");
+	        String num="201720180321";
+	        //if(num!=null) {
+	    	   if(DateBase_Gettable.getGymnasium(num)!=null) {
+		        	/*
+		        	 * 返回获取的场馆信息*/
+		        	System.out.println("场馆表中的内容为:"+DateBase_Gettable.getGymnasium(num));
+		        	response.getWriter().append(DateBase_Gettable.getGymnasium(num).toString());	
+		        }
+	        //}
 	        
 	        
 		}else {

@@ -40,7 +40,7 @@
         android:layout_marginLeft="270dp"
         android:text="预定"
         android:textSize="15sp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_reserverbg"
         android:textColor="@color/white"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"

@@ -1,7 +1,10 @@
 package com.example.yexin.menu6.Order;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.yexin.menu6.Common.Refresh.RefreshDialog;
 import com.example.yexin.menu6.Common.Url.Web_url;
 import com.example.yexin.menu6.Order.Order;
 import com.example.yexin.menu6.Index.SearchReasult;
@@ -36,6 +40,15 @@ public class TabFragment_ordering extends Fragment{
 
     private JSONArray jsonArr;
     private JSONObject jsonObject=null;
+
+
+    private RefreshDialog refreshDialog;
+    private int Refresh_status=2;
+    private final int Refresh_Success=1;
+    private final int Refresh_Fail=0;
+
+    private SwipeRefreshLayout swipeRefreshView;
+
     public static Fragment newInstance() {
         TabFragment_ordering fragment = new TabFragment_ordering();
         return fragment;
@@ -44,16 +57,70 @@ public class TabFragment_ordering extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler);
+        swipeRefreshView=(SwipeRefreshLayout)rootView.findViewById(R.id.gg_srfl);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         mData = new LinkedList<Order>();
-        InitData(recyclerView);
+        refreshContent(recyclerView);
+        pulldownRefresh(recyclerView);
        // recyclerView.setAdapter(new RecyclerAdapter((LinkedList<Order>)mData,getActivity()));
 
         return rootView;
     }
 
+    private void pulldownRefresh(final RecyclerView recyclerView) {
+        swipeRefreshView.setRefreshing(false);
+        swipeRefreshView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // 开始刷新，设置当前为刷新状态
+                //swipeRefreshLayout.setRefreshing(true);
+
+                // 这里是主线程
+                // 一些比较耗时的操作，比如联网获取数据，需要放到子线程去执行
+                // TODO 获取数据
+                //final Random random = new Random();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+//                        mList.add(0, "我是天才" + random.nextInt(100) + "号");
+//                        mAdapter.notifyDataSetChanged();
+                        try {
+                            InitData(recyclerView);
+                        } catch (Exception e) {
+                        }
+                       // Toast.makeText(getContext(), "刷新了一条数据", Toast.LENGTH_SHORT).show();
+
+                        // 加载完数据设置为不刷新状态，将下拉进度收起来
+
+                    }
+                }, 1200);
+            }
+
+        });
+    }
+    private void refreshContent(final RecyclerView recyclerView) {
+        refreshDialog = new RefreshDialog(getContext(),"正在加载...",R.mipmap.ic_dialog_loading);
+        refreshDialog.show();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    InitData(recyclerView);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                ((Activity)getContext()).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //在之中可以终止线程
+                    }
+                });
+            }
+        }).start();
+    }
     public void InitData(final RecyclerView recyclerView){
 
         String Account="18879942330";
@@ -78,6 +145,10 @@ public class TabFragment_ordering extends Fragment{
                 try{
                     //int jsonSize = result.length();//获取数据组的长度
                     jsonArr=new JSONArray(result);
+                    if(jsonArr.length()>0){
+                        mData=null;
+                        mData = new LinkedList<Order>();
+                    }
                     for(int i=0;i<jsonArr.length();i++){
 
                         jsonObject = (JSONObject)jsonArr.getJSONObject(i);
@@ -100,6 +171,10 @@ public class TabFragment_ordering extends Fragment{
             public void onError(Throwable ex, boolean isOnCallback) {
                 Log.e("yjq1","失败");
                 Toast.makeText(getContext(), "连接超时，请查看网络连接", Toast.LENGTH_SHORT).show();
+                swipeRefreshView.setRefreshing(false);
+
+                swipeRefreshView.setRefreshing(false);
+                refreshDialog.dismiss();
             }
             @Override
             public void onCancelled(CancelledException cex) {
@@ -108,8 +183,10 @@ public class TabFragment_ordering extends Fragment{
             @Override
             public void onFinished() {
                 Log.e("yjq","完成");
-                recyclerView.setAdapter(new RecyclerAdapter((LinkedList<Order>)mData,getActivity()));
+                refreshDialog.dismiss();
 
+                recyclerView.setAdapter(new RecyclerAdapter((LinkedList<Order>)mData,getActivity()));
+                swipeRefreshView.setRefreshing(false);
                 //完成时候运行
             }
         });

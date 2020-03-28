@@ -52,6 +52,7 @@ public class DateBase_Login {
 	public boolean isRegister(String name,String Password) {
 		Login table=new Login();
 		Session session=HibernateSessionFactory.getSession();
+		Transaction tran=session.beginTransaction();
 		session.clear();
 		if((table=(Login)session.get(Login.class, name))!=null) {
 			System.out.println("账号以存在");
@@ -71,9 +72,8 @@ public class DateBase_Login {
 			info.setNickname("一个小虎牙");  //昵称
 			info.setLevels(1);  //等级
 			info.setNavheader("http://172.22.70.227:8080/Images/"+picture);  //头像
-			Transaction tran=session.beginTransaction();
+			
 			session.save(login);
-			tran.commit();
 			session.save(info);
 			tran.commit();
 			session.close();

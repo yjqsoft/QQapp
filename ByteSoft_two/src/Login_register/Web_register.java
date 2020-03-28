@@ -9,6 +9,7 @@ import org.Json.Json;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
+import DateBase.DateBase_Addtable;
 import DateBase.DateBase_Login;
 import net.sf.json.JSONObject;
 
@@ -30,7 +31,8 @@ public class Web_register implements Controller {
 				 */
 				PrintWriter out = response.getWriter(); // 获取 response 的输出流
 				System.out.println("数据请求的方法："+Method);
-				if(Method=="POST")  {
+				System.out.println("结果："+"POST".equals(Method));
+				if("POST".equals(Method.toString()))  {
 					String read="";
 					DateBase_Login RegisterDate=new DateBase_Login();
 					System.out.println("POST请求");
@@ -44,6 +46,7 @@ public class Web_register implements Controller {
 			        	System.out.println("注册成功");
 			        	code="200";
 			        	message="注册成功";
+			        	//DateBase_Addtable.AddUserinfo(account); qiu  添加Userinfo 表的数据  先注释 
 			        }
 			        else {
 			        	System.out.println("注册失败");
@@ -52,7 +55,7 @@ public class Web_register implements Controller {
 			        }
 					System.out.println("账号："+account+"密码："+password);
 				}
-				else {
+			else/* if("GET".equals(Method))*/{
 					System.out.println("GET请求");
 					String query=request.getQueryString();
 					System.out.println("GET请求的数据："+query);

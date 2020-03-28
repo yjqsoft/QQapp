@@ -7,12 +7,17 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-
+import org.altertable.DeleteColllectionData;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.ov.HibernateSessionFactory;
+import org.table.Collection;
 import org.table.Gorder;
+import org.table.Joingame;
+import org.table.Login;
+import org.table.Userinfo;
+import java.util.Date;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -25,7 +30,7 @@ public class DateBase_Addtable {
 		Gorder gorder=new Gorder();
 		
 		Session session=HibernateSessionFactory.getSession();		
-		System.out.println("在这1");
+		System.out.println("在这1AddGorder");
 		try {			
 			session.clear();
 			Transaction tran=session.beginTransaction();
@@ -36,14 +41,22 @@ public class DateBase_Addtable {
 			gorder.setOtime(jsondate.getString("time"));
 			gorder.setOclass(jsondate.getString("Class"));
 			gorder.setOpay(jsondate.getString("pay"));
-			
-		
-			
-			DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Timestamp ts = new Timestamp(format.parse(jsondate.getString("appointment")).getTime());
-			System.out.println(ts);
 
-			gorder.setOappointment(ts);
+			DateFormat formatreserver = new SimpleDateFormat("yyyy-MM-dd");
+			Timestamp Nowtime = new Timestamp(formatreserver.parse(jsondate.getString("appointment")).getTime());
+			System.out.println("开始时间2："+Nowtime);
+			gorder.setOappointmenttime(Nowtime);
+			
+		    DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+			if(jsondate.getString("pay").equals("0")) {	
+				Timestamp Endtime = new Timestamp(format.parse(jsondate.getString("endappointment")).getTime());
+				gorder.setOendAppointmenttime(Endtime);	
+				System.out.println("开始时间1："+Nowtime+"结束时间1："+Endtime);
+							
+			}
+			
+			
 			gorder.setOsite(jsondate.getString("site"));
 			gorder.setOmony(Float.parseFloat(jsondate.getString("money")));
 			
@@ -66,11 +79,124 @@ public class DateBase_Addtable {
 				}
 				//删除
 			}
-			
 		}catch(Exception e){
 			System.out.println(e);
 			return false;
 		}		
 		return true;
+	}
+	
+public Boolean AddCollection(JSONObject jsondate) {
+		Session session=HibernateSessionFactory.getSession();		
+		System.out.println("在这1修改Collection");		
+		session.clear();
+		Transaction tran=session.beginTransaction();
+		
+		Query query=null;
+		query=session.createQuery("from Collection where userId='"+
+		jsondate.getString("userId")+"' and gymnasiumId='"+jsondate.getString("gymnasiumId")+"'");
+		System.out.println(query);
+		System.out.println(query.list().size());
+		if(query.list().size()!=0){
+			System.out.println("存在");
+			tran.commit();
+			session.close();
+			return DeleteColllectionData.DeleteColllectionData(jsondate);			
+		}else {	
+			try {			
+				Collection collection=null;
+				collection=new Collection();
+				//gorder.setOid(5);
+				System.out.println("存在数据："+jsondate.getString("userId"));
+				collection.setUserId(jsondate.getString("userId"));
+				collection.setGymnasiumId(jsondate.getString("gymnasiumId"));			
+				session.save(collection);
+				tran.commit();
+				session.close();					
+			}catch(Exception e){
+				System.out.println(e);
+				System.out.println("在这1添加Collection失败");
+				return false;
+				
+			}
+			System.out.println("在这1添加Collection成功");
+			return true;
+		}
+		
+	}
+	public  static Boolean AddUserinfo(String Account) {
+		Session session=HibernateSessionFactory.getSession();		
+		System.out.println("在这DataBase中修改userinfo");		
+		session.clear();
+		Transaction tran=session.beginTransaction();
+		Userinfo userinfo=new Userinfo();
+
+		if((userinfo=(Userinfo)session.get(Userinfo.class, Account))!=null) {
+			System.out.println("账号以存在");
+			session.close();
+			userinfo=null;
+			return false;
+		}else {
+
+			try {			
+//				Collection collection=null;
+//				collection=new Collection();
+				//gorder.setOid(5);
+				System.out.println("不存在数据!");
+				userinfo.setAccount(Account);
+				userinfo.setLevels(0);		
+				session.save(userinfo);
+				tran.commit();
+				session.close();					
+			}catch(Exception e){
+				System.out.println(e);
+				System.out.println("在这1添加userinfo失败");
+				return false;			
+			}
+			System.out.println("在这1添加userinfo成功");
+			return true;
+		}
+	}
+	
+	public int AddJoinGame(JSONObject jsondate) {
+		Session session=HibernateSessionFactory.getSession();		
+		System.out.println("在这1修改Joingame");		
+		session.clear();
+		Transaction tran=session.beginTransaction();
+		
+		Query query=null;
+		query=session.createQuery("from Joingame where userName='"+
+		jsondate.getString("userName")+"' and userPhone='"+jsondate.getString("userPhone")+"'");
+		System.out.println(query);
+		System.out.println(query.list().size());
+		if(query.list().size()!=0){
+			System.out.println("存在");
+			tran.commit();
+			session.close();
+			return 0;			
+		}else {	
+			try {			
+				Joingame joingame=null;
+				joingame=new Joingame();
+				//gorder.setOid(5);
+				
+				joingame.setUserName(jsondate.getString("userName"));
+				joingame.setUserPhone(jsondate.getString("userPhone"));
+				joingame.setGamePlace(jsondate.getString("gamePlace"));				
+				joingame.setGameName(jsondate.getString("gameName"));
+				joingame.setGameType(jsondate.getString("gameType"));
+					
+				session.save(joingame);
+				tran.commit();
+				session.close();					
+			}catch(Exception e){
+				System.out.println(e);
+				System.out.println("在这1添加joingame失败");
+				return 2;				
+			}
+			System.out.println("在这1添加joingame成功");
+			return 1;
+		}
+		
 	}
 }

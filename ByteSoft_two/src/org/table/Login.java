@@ -18,6 +18,12 @@ public class Login implements java.io.Serializable {
 	public Login() {
 	}
 
+	/** minimal constructor */
+	public Login(String account, String password) {
+		this.account = account;
+		this.password = password;
+	}
+
 	/** full constructor */
 	public Login(String account, String password, String validation) {
 		this.account = account;

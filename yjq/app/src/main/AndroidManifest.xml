@@ -68,9 +68,8 @@
         <activity
             android:name=".Show"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".Index.MainActivity">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Index.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -99,8 +98,10 @@
         <activity android:name=".Person_Information.Activitys.Header" />
         <activity android:name=".Common.Shear.Shear" />
         <activity android:name=".Ballculb.Payfaceture" />
-        <activity android:name=".Index.main_stadiums"/>
-        <activity android:name=".Index.BaiduMap.Stadium_location_show"/>
+        <activity android:name=".Index.main_stadiums" />
+        <activity android:name=".Index.BaiduMap.Stadium_location_show" />
+        <activity android:name=".Index.fragmenttwo_fourballs.fragmenttwo_balls_details" />
+        <activity android:name=".Index.fragmenttwo_fourballs.Fragmenttwo_balls_commit"/>
 
     </application>
 

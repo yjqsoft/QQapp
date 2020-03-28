@@ -1,6 +1,7 @@
 package org.table;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Gorder entity. @author MyEclipse Persistence Tools
@@ -16,7 +17,8 @@ public class Gorder implements java.io.Serializable {
 	private String oplace;
 	private String otime;
 	private String oclass;
-	private Timestamp oappointment;
+	private Date oappointmenttime;
+	private Timestamp oendAppointmenttime;
 	private String osite;
 	private Float omony;
 	private String opay;
@@ -27,15 +29,30 @@ public class Gorder implements java.io.Serializable {
 	public Gorder() {
 	}
 
-	/** full constructor */
-	public Gorder(String ouserId, String ono, String oplace, String otime, String oclass, Timestamp oappointment,
+	/** minimal constructor */
+	public Gorder(String ouserId, String ono, String oplace, String otime, String oclass, Date oappointmenttime,
 			String osite, Float omony, String opay) {
 		this.ouserId = ouserId;
 		this.ono = ono;
 		this.oplace = oplace;
 		this.otime = otime;
 		this.oclass = oclass;
-		this.oappointment = oappointment;
+		this.oappointmenttime = oappointmenttime;
+		this.osite = osite;
+		this.omony = omony;
+		this.opay = opay;
+	}
+
+	/** full constructor */
+	public Gorder(String ouserId, String ono, String oplace, String otime, String oclass, Date oappointmenttime,
+			Timestamp oendAppointmenttime, String osite, Float omony, String opay) {
+		this.ouserId = ouserId;
+		this.ono = ono;
+		this.oplace = oplace;
+		this.otime = otime;
+		this.oclass = oclass;
+		this.oappointmenttime = oappointmenttime;
+		this.oendAppointmenttime = oendAppointmenttime;
 		this.osite = osite;
 		this.omony = omony;
 		this.opay = opay;
@@ -91,12 +108,20 @@ public class Gorder implements java.io.Serializable {
 		this.oclass = oclass;
 	}
 
-	public Timestamp getOappointment() {
-		return this.oappointment;
+	public Date getOappointmenttime() {
+		return this.oappointmenttime;
 	}
 
-	public void setOappointment(Timestamp oappointment) {
-		this.oappointment = oappointment;
+	public void setOappointmenttime(Date oappointmenttime) {
+		this.oappointmenttime = oappointmenttime;
+	}
+
+	public Timestamp getOendAppointmenttime() {
+		return this.oendAppointmenttime;
+	}
+
+	public void setOendAppointmenttime(Timestamp oendAppointmenttime) {
+		this.oendAppointmenttime = oendAppointmenttime;
 	}
 
 	public String getOsite() {

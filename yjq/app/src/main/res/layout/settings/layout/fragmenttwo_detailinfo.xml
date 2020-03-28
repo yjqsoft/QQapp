@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:id="@+id/fragmenttwo_detailinfo_linear"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:background="@color/c1"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/fragmenttwo_detailinfo_icon"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="球类"
+            android:textSize="15dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/fragmenttwo_detailinfo_icon"
+            android:layout_toEndOf="@+id/fragmenttwo_detailinfo_icon" />
+        <TextView
+            android:paddingRight="5dp"
+            android:id="@+id/fragmenttwo_detailtext_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="时间"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:background="@color/colorWhite"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+        <TextView
+            android:id="@+id/fragmenttwo_detailtext_moreinfo"
+            android:paddingLeft="5dp"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="nihao"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/white"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_badminton1"
+            android:layout_weight="1"/><!--android:src="@mipmap/ic_badminton"-->   <!--android:src="@drawable/asf"-->
+
+        <!--android:id="@+id/iv_competition_poster"-->
+        <!--android:layout_width="140dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginEnd="10dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:background="@drawable/quanshui"/>-->
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/colorWhite">
+        <TextView
+            android:paddingTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看详情"/>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/forward"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+</LinearLayout>

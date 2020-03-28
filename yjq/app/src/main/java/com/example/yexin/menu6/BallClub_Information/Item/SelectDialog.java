@@ -1,10 +1,13 @@
 package com.example.yexin.menu6.BallClub_Information.Item;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.yexin.menu6.BallClub_Information.Item.GetBallTypeData.GetData;
 import com.example.yexin.menu6.Ballculb.Payfaceture;
+import com.example.yexin.menu6.Common.Refresh.RefreshDialog;
 import com.example.yexin.menu6.Common.Url.Web_url;
 import com.example.yexin.menu6.Index.SearchReasult;
 import com.example.yexin.menu6.Index.SearchResultAdapter;
@@ -58,13 +62,20 @@ public class SelectDialog extends Dialog implements SKUInterface {
 
     private String placenum;
     private String Tempstr;
-    private String [] placeStateString=new String [2];
+
+    private SwipeRefreshLayout swipeRefreshView;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_select);
         dialog_cancel=(ImageView)findViewById(R.id.dialog_cancel);
         btn_next=(Button)findViewById(R.id.btn_next);
+        swipeRefreshView=(SwipeRefreshLayout)findViewById(R.id.gg_srfl);
+
+        pulldownRefresh();
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +123,35 @@ public class SelectDialog extends Dialog implements SKUInterface {
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         //window.setLayout(5000,200);
     }
+
+    private void pulldownRefresh() {
+        swipeRefreshView.setRefreshing(false);
+        swipeRefreshView.setRefreshing(true);
+
+                // 开始刷新，设置当前为刷新状态
+                //swipeRefreshLayout.setRefreshing(true);
+
+                // 这里是主线程
+                // 一些比较耗时的操作，比如联网获取数据，需要放到子线程去执行
+                // TODO 获取数据
+                //final Random random = new Random();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+//                        mList.add(0, "我是天才" + random.nextInt(100) + "号");
+//                        mAdapter.notifyDataSetChanged();
+                        try {
+                            HttpGetData();
+                        } catch (Exception e) {
+                        }
+                        // Toast.makeText(mContext, "刷新了一条数据", Toast.LENGTH_SHORT).show();
+
+                        // 加载完数据设置为不刷新状态，将下拉进度收起来
+
+                    }
+                }, 1200);
+    }
+
 
     public SelectDialog(Context context,String BallType) {
         super(context);
@@ -170,6 +210,7 @@ public class SelectDialog extends Dialog implements SKUInterface {
                 public void onError(Throwable ex, boolean isOnCallback) {
                     Log.e("yjq1","失败");
                     Toast.makeText(context, "连接超时，请查看网络连接", Toast.LENGTH_SHORT).show();
+                    swipeRefreshView.setRefreshing(false);
                 }
                 @Override
                 public void onCancelled(CancelledException cex) {
@@ -181,18 +222,25 @@ public class SelectDialog extends Dialog implements SKUInterface {
                     Log.e("yjq","完成");
                     try{
                         jsonArray=new JSONArray(Tempstr);
+
                         Log.e("jsonObject:","长度为a:"+jsonArray.length());//求出数据中的个数
                         jsonObject = (JSONObject)jsonArray.getJSONObject(jsonArray.length()-1);
+                        String [] placeStateString=new String [jsonObject.getString("ballnum").length()];
+                        Log.e("jsonObject","jsonObject:"+jsonObject.getString("ballnum"));
                         placenum=jsonObject.getString("ballnum");
+                        Log.e("json11","placenum:"+"... "+placenum.length());
                         for(int i=0;i<placenum.length();i++){
                             String a=((JSONObject)jsonArray.getJSONObject(i)).getString(placenum.substring(i,i+1));
+                            Log.e("json11","a:"+a);
                             placeStateString[i]=a;
+                            Log.e("json11","placeStateString:"+i+"... "+placeStateString[i]);
                         }
+                        init(placeStateString);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                    init();
                     install();
+                    swipeRefreshView.setRefreshing(false);
 //                        mAdapter=new SearchResultAdapter((LinkedList<SearchReasult>) mData,mContext);
 //                        search_result_listview.setAdapter(mAdapter);
                     //完成时候运行
@@ -202,14 +250,14 @@ public class SelectDialog extends Dialog implements SKUInterface {
             Toast.makeText(context, "请求数据错误", Toast.LENGTH_SHORT).show();
         }
     }
-    private void init() {
+    private void init(String placeStateString[]) {
         gson = new Gson();
         //tv_title = (TextView) findViewById(R.id.tv_title);
         rv_sku = (RecyclerView) findViewById(R.id.rv_sku);
         ballclub_name=(TextView)findViewById(R.id.ballclub_name);
         ball_kind=(TextView) findViewById(R.id.ball_kind);
 
-       Log.e("json11","dwqd"+placenum+placeStateString[0]+placeStateString[1]);
+       Log.e("json11","dwqd"+placenum+placeStateString[0]);
         BallClubStr= GetData.setInfo(placenum,placeStateString);
         dataBean = gson.fromJson(BallClubStr, GoodsAttrsBean.class);
         Log.e("qwe",dataBean.toString());

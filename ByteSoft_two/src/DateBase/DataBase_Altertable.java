@@ -20,25 +20,7 @@ public class DataBase_Altertable {
 		
 		switch(table_type) {
 		case "A":
-			//A a=new A();
 			try {
-//				"update TUser u set u.userName=?,u.age=? where u.id=?"; +table_type + 
-//				"update News set title='我是老虎' where content=32323"
-//		        String hql = "update A a set a.a:time='0' where a.avno=:stadium_no and a.acno=:place";
-		        //System.out.println("hql:"+hql);
-//				Session session=HibernateSessionFactory.getSession();		
-//				System.out.println("在这修改");			
-//				session.clear();
-//				Transaction tran=session.beginTransaction();
-//				String hql="select * from A where avno='"+stadium_no+"' and acno='"+place+"'";
-//				System.out.println("hql:"+hql);
-//		        query= session.createQuery(hql);
-//		        List list=query.list();
-//		        tran.commit();
-//		        query.executeUpdate();
-				
-				
-				
 				
 				Session session=HibernateSessionFactory.getSession();
 				Transaction tr = session.beginTransaction();
@@ -61,26 +43,100 @@ public class DataBase_Altertable {
 					session.close();
 				}
 
+			
+							
+			}catch(Exception e){
+				System.out.println(e);
+				return false;
+			}
+			break;
+		case "B":
+			try {
 				
+				Session session=HibernateSessionFactory.getSession();
+				Transaction tr = session.beginTransaction();
+			//"update a set stuname = ?,stusex = ? where stuid = ? "
+				String hql = "update b set b"+time+"='0' where bvno= ? and bcno= ? ";
+				System.out.println("hql:"+hql);
+				int i = session.createSQLQuery(hql)
+					.setParameter(0, stadium_no)
+					.setParameter(1, place)
+					.executeUpdate();				
+				System.out.println(i);
 				
-//				session.beginTransaction();
-//				A t = (A) session.get(A.class, 2);
-//				t.setA7(0);
-//				session.update(t);
-//				
-//				session.getTransaction().commit();
+				//事务回滚、关流
+				try {
+					tr.commit();
+				} catch (Exception e) {
+					tr.rollback();
+					e.printStackTrace();
+				}finally{
+					session.close();
+				}
+
+			
+							
+			}catch(Exception e){
+				System.out.println(e);
+				return false;
+			}
+			break;
+		case "C":
+			try {
 				
+				Session session=HibernateSessionFactory.getSession();
+				Transaction tr = session.beginTransaction();
+			//"update a set stuname = ?,stusex = ? where stuid = ? "
+				String hql = "update c set c"+time+"='0' where cvno= ? and ccno= ? ";
+				System.out.println("hql:"+hql);
+				int i = session.createSQLQuery(hql)
+					.setParameter(0, stadium_no)
+					.setParameter(1, place)
+					.executeUpdate();				
+				System.out.println(i);
 				
+				//事务回滚、关流
+				try {
+					tr.commit();
+				} catch (Exception e) {
+					tr.rollback();
+					e.printStackTrace();
+				}finally{
+					session.close();
+				}
+
+			
+							
+			}catch(Exception e){
+				System.out.println(e);
+				return false;
+			}
+			break;
+		case "D":
+			try {
 				
-//		        Session session=HibernateSessionFactory.getSession();
-//				Transaction tran=session.beginTransaction();
-//				A=(A)session.get(A.class, name);
-//		        userinfo.setNavheader(context);
-//		        session.update(userinfo);
-//				tran.commit();
-//				session.clear();
-//				session.close();
-//				userinfo=null;
+				Session session=HibernateSessionFactory.getSession();
+				Transaction tr = session.beginTransaction();
+			//"update a set stuname = ?,stusex = ? where stuid = ? "
+				String hql = "update d set d"+time+"='0' where dvno= ? and dcno= ? ";
+				System.out.println("hql:"+hql);
+				int i = session.createSQLQuery(hql)
+					.setParameter(0, stadium_no)
+					.setParameter(1, place)
+					.executeUpdate();				
+				System.out.println(i);
+				
+				//事务回滚、关流
+				try {
+					tr.commit();
+				} catch (Exception e) {
+					tr.rollback();
+					e.printStackTrace();
+				}finally{
+					session.close();
+				}
+
+			
 							
 			}catch(Exception e){
 				System.out.println(e);
@@ -93,6 +149,32 @@ public class DataBase_Altertable {
 				
 		
 	return true;
+	}
+	
+	public  static Boolean DelectGorder(int id) {
+		Session session=HibernateSessionFactory.getSession();		
+		System.out.println("在这DataBase中修改(删除)gorder");		
+		session.clear();
+		Transaction tran=session.beginTransaction();
+		Gorder gorder=new Gorder();
+		
+		try {
+			String hql = "Delete FROM gorder Where Oid=? ";
+			System.out.println("hql:"+hql);
+			int i = session.createSQLQuery(hql)
+				.setParameter(0, id)
+				.executeUpdate();				
+			System.out.println(i);
+			
+			tran.commit();
+			session.close();	
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+			}
+		System.out.println("在这1删除gorder成功");
+		return true;
+
 	}
 
 }

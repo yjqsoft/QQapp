@@ -41,7 +41,10 @@ public class Web_login implements Controller {
 		PrintWriter out = response.getWriter(); // 获取 response 的输出流
 		        
 		System.out.println("数据请求的方法："+Method);
-		if("POST".equals(Method))  {
+		if( "POST".equals(Method.toString())) {
+			System.out.println("登陆结果成功："+Method);
+		}
+		if("POST".equals(Method.toString()))  {
 			String read=""; //解析的Json报文
 			int login_int;  //登入状态的选择
 			DateBase_Login loginDate=new DateBase_Login();

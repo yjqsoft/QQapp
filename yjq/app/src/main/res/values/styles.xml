@@ -14,9 +14,7 @@
 
     <style name="TranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
-
         <item name="android:fitsSystemWindows">true</item>
-
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -64,5 +62,18 @@
     <style name="TabStyle" parent="Theme.AppCompat.Light">
         <item name="textAllCaps">false</item>
         <item name="android:textSize">18sp</item>
+    </style>
+<!--刷新界面的样式
+1.背景
+2.
+-->
+    <style name="RefreshDialog" parent="@android:style/Theme.Holo.Dialog.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="IosDialog" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/sharepop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/sharepop_exit_anim</item>
     </style>
 </resources>

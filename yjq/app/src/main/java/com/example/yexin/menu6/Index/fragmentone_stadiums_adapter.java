@@ -1,5 +1,6 @@
 package com.example.yexin.menu6.Index;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -68,14 +69,18 @@ public class fragmentone_stadiums_adapter extends BaseAdapter {
                     Log.e("wz","hhj1"+mData.get(position).getNo());/*场馆编号获取到*/
                     Toast.makeText(mContext,"aaav"+mData.get(position).getNo(),Toast.LENGTH_SHORT).show();
 
-
-
                     Intent intent=new Intent(mContext,main_stadiums.class);
                     Log.e("wz","position"+position);
+                    intent.putExtra("phone",mData.get(position).getPhone());
                     intent.putExtra("position",""+position);
                     main_stadiums.setmData(mData,mContext);
                     //intent.setClass(mContext,mData);
                     mContext.startActivity(intent);
+                    if (Activity.class.isInstance(mContext)) {
+                        // 转化为activity，然后finish就行了
+                        Activity activity = (Activity) mContext;
+                        activity.finish();
+                    }
                 }
             });
             convertView.setTag(holder);

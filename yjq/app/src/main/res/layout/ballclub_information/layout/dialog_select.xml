@@ -4,6 +4,11 @@
     android:background="@color/colorGray"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gg_srfl">
+
     <RelativeLayout
         android:id="@+id/rl_dialog"
         android:layout_width="match_parent"
@@ -86,6 +91,6 @@
             android:layout_marginTop="0dp"
             android:layout_above="@id/btn_next"/>-->
     </RelativeLayout>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

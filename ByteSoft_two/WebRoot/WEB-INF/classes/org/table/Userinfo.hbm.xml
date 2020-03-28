@@ -20,22 +20,22 @@
             <column name="Levels" not-null="true" />
         </property>
         <property name="region" type="java.lang.String">
-            <column name="Region" length="50" not-null="true" />
+            <column name="Region" length="50" />
         </property>
         <property name="sex" type="java.lang.String">
-            <column name="Sex" length="2" not-null="true" />
+            <column name="sex" length="2" />
         </property>
         <property name="birth" type="java.util.Date">
-            <column name="Birth" length="10" not-null="true" />
+            <column name="Birth" length="10" />
         </property>
         <property name="signature" type="java.lang.String">
-            <column name="Signature" not-null="true" />
+            <column name="Signature" />
         </property>
         <property name="netBanking" type="java.lang.String">
-            <column name="NetBanking" length="19" not-null="true" />
+            <column name="NetBanking" length="19" />
         </property>
         <property name="reallyName" type="java.lang.String">
-            <column name="ReallyName" length="20" not-null="true" />
+            <column name="ReallyName" length="20" />
         </property>
     </class>
 </hibernate-mapping>

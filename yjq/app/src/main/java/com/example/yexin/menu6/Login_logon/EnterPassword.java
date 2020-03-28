@@ -58,6 +58,8 @@ public class EnterPassword extends Activity {
         et_verification_code = (EditText)findViewById(R.id.et_verification_code);
         et_password_one=(EditText)findViewById(R.id.et_password_one);
         editText3=(EditText)findViewById(R.id.editText3);
+        Intent intent = getIntent();
+        phone = intent.getStringExtra("phone");
     }
     public void onClick(View view){
         switch (view.getId()){
@@ -70,12 +72,13 @@ public class EnterPassword extends Activity {
                 Intent intent = getIntent();
                 phone = intent.getStringExtra("phone");
                 //获取验证码
-                SMSSDK.getVerificationCode("86",phone, (OnSendMessageHandler) null);
+                //SMSSDK.getVerificationCode("86",phone, (OnSendMessageHandler) null);
                 break;
             case R.id.btn_final_register:
                 number = et_verification_code.getText().toString();
                 Pwd_one=et_password_one.getText().toString();
                 Pwd_two=editText3.getText().toString();
+                Log.w("password", "运行在这个two:"+Pwd_two+"运行在这个one:"+Pwd_one);
                 if(TextUtils.isEmpty(Pwd_one))
                     Toast.makeText(EnterPassword.this,"密码不能为空",Toast.LENGTH_SHORT).show();
                 else if(!Pwd_one.equals(Pwd_two))
@@ -84,22 +87,23 @@ public class EnterPassword extends Activity {
                     Toast.makeText(EnterPassword.this,"请填写验证码",Toast.LENGTH_SHORT).show();
                 else {
                     Log.i("1234", phone + "," + number);
-                    SMSSDK.submitVerificationCode("86", phone, number);
+                   // SMSSDK.submitVerificationCode("86", phone, number); // 12138
                     //String url = "http://172.22.165.167:8080/ByteSoft_two/Register";
                     RequestParams params = new RequestParams(Web_url.URL_Register);
                     // params2 = new RequestParams(URL1);
                     Log.w("WangJ", "运行在这个ok"+params.toString());
-                    Log.w("WangJ", "运行在这个ok");
-                    String jsonObject= Web_Json.Login(phone.toString(),Pwd_one.toString());
+                    Log.w("WangJ", "运行在这个ok"+phone);
+                    String jsonObject= Web_Json.Login(phone,Pwd_one);
                     params.addHeader("Content-Type", "application/json-rpc"); //设置请求头部\
                     params.setAsJsonContent(true);//设置为json内容(这句个本人感觉不加也没有影响)
+                    Log.w("WangJ", "运行在这个ok:"+jsonObject.toString());
                     params.setBodyContent(jsonObject);//添加json内容到请求参数里
                    /* params.addParameter("name", "abc");
                     params.addParameter("password", "123");*/
                     x.http().post(params, new Callback.CommonCallback<String>() {
                         @Override
                         public void onSuccess(String result) {
-                            Log.w("yjq",result);//接收JSON的字符串
+                            Log.w("register",result);//接收JSON的字符串
                             //Toast.makeText(x.app(),result,Toast.LENGTH_LONG).show();
                         }
                         @Override

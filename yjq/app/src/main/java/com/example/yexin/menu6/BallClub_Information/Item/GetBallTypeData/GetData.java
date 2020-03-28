@@ -79,6 +79,8 @@ public  class  GetData {
             jsonObject.put("attributes",Getattributes.Getattributes(placeNum));
 
             for (int j=1;j<=placenum.length();j++) {
+
+                Log.e("num12","placeStateString:"+j+" "+placeStateString[j-1].length()+placeStateString[j-1]);
                 for(int i=1;i<=placeStateString[j-1].length();i++){
                     placeState[j][i]=placeStateString[j-1].substring(i-1,i);
                     Log.e("num1",placeState[j][i]);

@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.yexin.menu6.Index.oneFragment"
     android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gg_srfl"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
 <ScrollView
     android:scrollbars="none"
     android:layout_width="match_parent"
@@ -55,8 +62,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="420dp"
                 android:layout_marginBottom="20dp"/>
+            <com.example.yexin.menu6.Common.Refresh.BaiDuRefreshListView
+                android:id="@+id/lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
         </RelativeLayout>
 
     </LinearLayout>
 </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

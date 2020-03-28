@@ -27,6 +27,14 @@ public class Userinfo implements java.io.Serializable {
 	public Userinfo() {
 	}
 
+	/** minimal constructor */
+	public Userinfo(String account, String navheader, String nickname, Integer levels) {
+		this.account = account;
+		this.navheader = navheader;
+		this.nickname = nickname;
+		this.levels = levels;
+	}
+
 	/** full constructor */
 	public Userinfo(String account, String navheader, String nickname, Integer levels, String region, String sex,
 			Date birth, String signature, String netBanking, String reallyName) {
